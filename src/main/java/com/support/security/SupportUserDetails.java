@@ -20,8 +20,9 @@ public class SupportUserDetails  implements UserDetails {
     }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        
+        System.out.println(User.getPrivilage());
         return Collections.singleton(new SimpleGrantedAuthority(User.getPrivilage()));
+
     }
 
     @Override

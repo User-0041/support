@@ -8,7 +8,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,7 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
+import com.support.Entitis.Resever;
 import com.support.Entitis.Ticket;
 import com.support.Entitis.User;
 
@@ -26,8 +25,8 @@ import com.support.Enums.Status;
 import com.support.Services.BreakDownService;
 import com.support.Services.MachineService;
 import com.support.Services.TicketService;
+import com.support.Services.UserService;
 import com.support.Utils.Utils;
-import com.support.security.SupportUserDetails;
 
 
 
@@ -41,6 +40,8 @@ public class SupportController {
     BreakDownService BreakDownService;
     @Autowired
     MachineService MachineService;
+    @Autowired
+    UserService UserService;
 
     @GetMapping("/Support/OpenSupport")
     public String OpenSupport(Ticket ticket,Model model) {
@@ -52,6 +53,18 @@ public class SupportController {
     public String CloseSupportPage(Model model) {
     
         return "CloseSupport";
+    }
+
+
+ 
+    @PostMapping("/Support/CloseSupport/{id}")
+    public String TakeSupport(@PathVariable("id") String id,Principal principal,@RequestParam(name = "DESCREPTION") String DESCREPTION ,@RequestParam(name = "OBSERVATION") String OBSERVATION, Model model) {
+        id="32d743a6-29a6-4364-9fd8-f224aee3df5a";
+        Optional<Ticket> t= TicketService.FindById(id);
+        if(t.isEmpty()){return "index";}
+        t.get().setTecnesstion((Resever) UserService.findByUsername(principal.getName()));        
+        TicketService.CloseTicket(t.get());
+        return "redirect:/";
     }
 
     @PostMapping("/Support/CloseSupport/{id}")
@@ -81,14 +94,16 @@ public class SupportController {
     }
 
     @PostMapping("/Support/OpenSupport")
-    String  OpenTicket( @Valid Ticket ticket, Errors errors, Model model,BindingResult result){
+    String  OpenTicket( @Valid Ticket ticket,Principal principal ,Errors errors, Model model,BindingResult result){
         model.addAttribute("BreakDowns",BreakDownService.FindAll() );
         if (null != errors && errors.getErrorCount() > 0) { return "OpenSupport";}
         System.out.println(errors);
         ticket.setStatus(Status.Open);
         ticket.setIssueDate(Utils.CurrentDate());
-        ticket.setUser(new User("U1", "U1"));       
+        ticket.setUser(UserService.findByUsername(principal.getName()));       
         TicketService.CloseTicket(ticket);
         return "index";
     }
+
+ 
 }
