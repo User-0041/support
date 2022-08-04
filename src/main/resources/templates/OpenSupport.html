@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+</head>
+<body>
+    <body>
+        <div class="container">
+            <h1>Open Support Ticket</h1>
+            <form class="needs-validation" method="post" th:action="@{/Support/OpenSupport} "  th:object="${ticket}" >
+                <div class="form-row">
+                    <div class="col-md-7 mb-3">
+                        <label for="Machine_ID">Machine_ID</label>
+                        <input type="text" class="form-control"  th:field="*{machine}"  id="machine" placeholder="XXXXXX" >
+                        
+                        <div class="alert alert-warning" role="alert" th:if="${#fields.hasErrors('machine')}" th:errors="*{machine}"> </div>
+                        
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-7 mb-3">
+                        <label for="Level">LEVEL</label>
+                        <select  th:field="*{Level}"  class="custom-select">
+                            <option value="Low">Low</option>
+                            <option value="Normal">Hige</option>
+                            <option value="Critical">Critical</option>
+                          </select>
+                        
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-7 mb-3">
+                        <label >TITELE</label>
+                        <input type="text" class="form-control" th:field="*{Titel}" id="Titel" placeholder="Pierre" >
+                        <div class="alert alert-warning" role="alert" th:if="${#fields.hasErrors('Titel')}" th:errors="*{Titel}"> </div>
+
+                        
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-7 mb-3">
+                        <label for="LEVEL">ERROR TYPE</label>
+                        <select  class="custom-select"  th:field="*{breakdown}"  >
+                           
+                           <option th:each="BreakDown: ${BreakDowns}" th:value="${BreakDown.Id}" th:text="${BreakDown.type}">Pls work</option>
+           
+                          </select>
+                        
+                    </div>
+                </div>
+        
+
+                <button class="btn btn-primary" type="submit">Envoyer</button>
+                <button class="btn btn-Secondery" type="reset">Reset</button>
+
+            </form>
+        </div>
+   </body>
+</body>
+</html>

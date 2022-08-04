@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+</head>
+<body>
+    <body>
+
+        <nav class="navbar navbar-light bg-light">
+            <form class="form-inline">
+                <div class="form-row align-items-center">
+                    <div class="col-auto my-1">
+                      
+             <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                        <option selected>Choose...</option>
+                        <option value="1">Open</option>
+                        <option value="2">Closed</option>
+                        <option value="3">InProggres</option>
+                      </select>
+                    </div>
+              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+          </nav>    
+    
+          <table class="table">
+            <thead>
+              <tr>
+                
+                <th scope="col">Machine ID</th>
+                <th scope="col">title</th>
+                <th scope="col">Level</th>
+                <th scope="col">breakdown</th>
+                <th scope="col">status</th>
+                <th scope="col">Actions</th>
+
+
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="ticket: ${ticketList}" >
+               
+                <td th:text="${ticket.machine.Id}">M1</td>
+                <td th:text="${ticket.Titel}">Electrical short</td>
+                <td>
+                  <button  th:if="${ticket.Level.name()=='Low' }" type="button" class="btn btn-secondary  col-5" disabled>Low</button>
+                  <button  th:if="${ticket.Level.name()=='Normal' }" type="button" class="btn btn-warning  col-5" disabled>Normal</button>
+                  <button  th:if="${ticket.Level.name()=='Critical' }" type="button" class="btn btn-danger  col-5" disabled>Critical</button>
+
+                  
+                </td>
+                <td>Electrical</td>
+                <td>
+                  <button  th:if="${ticket.Status.name()=='Open' }" type="button" class="btn btn-primary  col-5" disabled>Open</button>
+                  <button  th:if="${ticket.Status.name()=='Closed' }" type="button" class="btn btn col-5" disabled>Closed</button>
+                  <button  th:if="${ticket.Status.name()=='InProgress' }" type="button" class="btn btn-warning  col-5" disabled>InProgress</button>
+                </td>
+                <td th:if="${ticket.Status.name()=='Open' }"><button type="button" class="btn btn-primary">Take Ticket</button>  <button type="button" class="btn btn-warning">Drope Ticket</button> </td>
+                <td th:if="${ticket.Status.name()=='InProgress' }"><button type="button" class="btn btn-info col-5" disabled>Ticket is taken</button>  </td>
+                <td th:if="${ticket.Status.name()=='Closed' }"><button type="button" class="btn btn-success col-5" >Ticket is Closed</button>  </td>
+
+              
+
+              </tr>
+   
+              </tr>
+            </tbody>
+          </table>
+          <nav aria-label="Page navigation example">
+            <ul class="pagination">
+              <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                  <span class="sr-only">Previous</span>
+                </a>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                  <span class="sr-only">Next</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+      </body>
+</body>
+</html>
+
+
+
+

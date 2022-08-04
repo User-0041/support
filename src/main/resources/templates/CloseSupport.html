@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+</head>
+<body>
+    <body>
+        <div class="container">
+            <h1>Close Ticket Support Ticket</h1>
+            <form class="needs-validation" method="post" th:action="@{/Support/CloseSupport/{id}(id=5) }" novalidate>
+                <div class="form-row">
+                    <div class="col-md-7 mb-3">
+                        <label for="prenom">DESCREPTION</label>
+                        <textarea class="form-control" name="DESCREPTION" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        <div class="valid-feedback">Ok !</div>
+                        <div class="invalid-feedback">Valeur incorrecte</div>
+                        
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-7 mb-3">
+                        <label for="prenom">OBSERVATION</label>
+                        <textarea class="form-control" name="OBSERVATION" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        <div class="valid-feedback">Ok !</div>
+                        <div class="invalid-feedback">Valeur incorrecte</div>
+                        
+                    </div>
+                </div>
+        
+
+                <button class="btn btn-primary" type="submit">Envoyer</button>
+                <button class="btn btn-Secondery" type="reset">Reset</button>
+
+            </form>
+        </div>
+   </body>
+</body>
+</html>
