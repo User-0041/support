@@ -60,9 +60,27 @@
                   <button  th:if="${ticket.Status.name()=='Closed' }" type="button" class="btn btn col-5" disabled>Closed</button>
                   <button  th:if="${ticket.Status.name()=='InProgress' }" type="button" class="btn btn-warning  col-5" disabled>InProgress</button>
                 </td>
-                <td th:if="${ticket.Status.name()=='Open' }"><button type="button" class="btn btn-primary">Take Ticket</button>  <button type="button" class="btn btn-warning">Drope Ticket</button> </td>
-                <td th:if="${ticket.Status.name()=='InProgress' }"><button type="button" class="btn btn-info col-5" disabled>Ticket is taken</button>  </td>
-                <td th:if="${ticket.Status.name()=='Closed' }"><button type="button" class="btn btn-success col-5" >Ticket is Closed</button>  </td>
+                <div th:if="${ticket.Status.name()=='Open'  }">
+
+                  <form class="d-inline " method="POST" th:action="@{/Support/TakeSupport/{id}(id=${ticket.Id})}" >  
+                    <td ><button type="submit" class="btn btn-primary">Take Ticket</button>  
+                    </form>
+                    <form  class="d-inline "  method="POST" th:action="@{/Support/DropeSupport/{id}(id=${ticket.Id})}">
+                    <button type="submit" class="btn btn-warning">Drope Ticket</button> 
+                    </form>
+
+                </div>
+              
+              
+              </td>
+                  
+                  
+                
+                <td th:if="${ticket.Status.name()=='InProgress' && !(ticket.Tecnesstion.Username==username)  }"><button type="button" class="btn btn-info col-5" disabled>Ticket is taken</button>  </td>
+                <form  class="d-inline "  method="get" th:action="@{/Support/CloseSupport/{id}(id=${ticket.Id})}">
+                <td th:if="${ticket.Status.name()=='InProgress' && ticket.Tecnesstion.Username==username }"><button type="submit" class="btn btn-dark col-5" >Close Ticket</button>  </td>
+                </form>
+                <td th:if="${ticket.Status.name()=='Closed' }"><button type="button" class="btn btn-success col-5" >More Info</button>  </td>
 
               
 

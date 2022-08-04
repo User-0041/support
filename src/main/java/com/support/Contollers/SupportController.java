@@ -49,42 +49,60 @@ public class SupportController {
         return "OpenSupport";
     }
 
-    @GetMapping("/Support/CloseSupport")
-    public String CloseSupportPage(Model model) {
-    
+    @GetMapping("/Support/CloseSupport/{id}")
+    public String CloseSupportPage(@PathVariable("id") String id,Model model) {
+        model.addAttribute("Tid", id);
         return "CloseSupport";
     }
 
 
  
-    @PostMapping("/Support/CloseSupport/{id}")
-    public String TakeSupport(@PathVariable("id") String id,Principal principal,@RequestParam(name = "DESCREPTION") String DESCREPTION ,@RequestParam(name = "OBSERVATION") String OBSERVATION, Model model) {
-        id="32d743a6-29a6-4364-9fd8-f224aee3df5a";
+    @PostMapping("/Support/TakeSupport/{id}")
+    public String TakeSupport(@PathVariable("id") String id,Principal principal, Model model) {
         Optional<Ticket> t= TicketService.FindById(id);
         if(t.isEmpty()){return "index";}
         t.get().setTecnesstion((Resever) UserService.findByUsername(principal.getName()));        
+        t.get().setStatus(Status.InProgress);
         TicketService.CloseTicket(t.get());
+
         return "redirect:/";
     }
 
-    @PostMapping("/Support/CloseSupport/{id}")
-    public String CloseSupport(@PathVariable("id") String id,@RequestParam(name = "DESCREPTION") String DESCREPTION ,@RequestParam(name = "OBSERVATION") String OBSERVATION, Model model) {
-        id="32d743a6-29a6-4364-9fd8-f224aee3df5a";
+
+
+    @PostMapping("/Support/DropeSupport/{id}")
+    public String DropeSupport(@PathVariable("id") String id,Principal principal, Model model) {
         Optional<Ticket> t= TicketService.FindById(id);
-        if(t.isEmpty()){return "index";}
+        if(t.isEmpty()){System.out.println("not found"); return "index";}
+        if((t.get().getTecnesstion().getUsername()==principal.getName())){ System.out.println("Not Yours");;return "index";};
+
+       
+        TicketService.DropTicket(t.get());
+        
+
+        return "redirect:/";
+    }
+
+
+
+    @PostMapping("/Support/CloseSupport")
+    public String CloseSupport(@RequestParam(name = "DESCREPTION") String DESCREPTION,@RequestParam(name = "ID") String id ,@RequestParam(name = "OBSERVATION") String OBSERVATION, Model model) {
+        Optional<Ticket> t= TicketService.FindById(id);
+        System.out.println(id);
+        if(t.isEmpty()){ return "index";}
         
         t.get().setObservetion(OBSERVATION);
         t.get().setDescrption(DESCREPTION);
         t.get().setCloseDate(Utils.CurrentDate());
         t.get().setStatus(Status.Closed);
         TicketService.CloseTicket(t.get());
-        return "redirect:/";
+        return "index";
     }
 
     @GetMapping("/Support/ListSupport")
-    public String ListSupport(Model model) {
+    public String ListSupport(Model model,Principal principal) {
         model.addAttribute("ticketList",TicketService.FindAll(PageRequest.of(0,7)) );
-        
+        model.addAttribute("username",principal.getName() );
         return "ListSupport";
     }
 
@@ -94,10 +112,16 @@ public class SupportController {
     }
 
     @PostMapping("/Support/OpenSupport")
-    String  OpenTicket( @Valid Ticket ticket,Principal principal ,Errors errors, Model model,BindingResult result){
+    String  OpenTicket( @Valid Ticket ticket,BindingResult result,Principal principal ,Errors errors, Model model){
         model.addAttribute("BreakDowns",BreakDownService.FindAll() );
-        if (null != errors && errors.getErrorCount() > 0) { return "OpenSupport";}
+
         System.out.println(errors);
+        System.out.println(errors.getErrorCount());
+
+        if (null != errors && errors.getErrorCount() > 0) { return "OpenSupport";}
+   
+
+
         ticket.setStatus(Status.Open);
         ticket.setIssueDate(Utils.CurrentDate());
         ticket.setUser(UserService.findByUsername(principal.getName()));       

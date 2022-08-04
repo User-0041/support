@@ -18,4 +18,9 @@ public class Resever extends User {
     public String getPrivilage() {
                 return privilage;
     }
+
+    @Override
+    public String getUsername() {
+                return super.getUsername();
+    }
 }
