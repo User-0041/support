@@ -6,4 +6,5 @@ public interface UserInterface  {
     void CreateResever(User r);
     void RevokeResever(User r);
     void findAll();
+    User findByUsername(String Username );
 }
