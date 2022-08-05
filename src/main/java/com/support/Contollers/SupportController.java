@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.support.Entitis.Resever;
 import com.support.Entitis.Ticket;
@@ -113,8 +114,8 @@ public class SupportController {
     }
 
     @GetMapping
-    public String Index(Principal principal,Model model){
-        return "";
+    public ModelAndView Index(Principal principal,Model model){
+        return new ModelAndView("redirect:/login");
     }
 
     @PostMapping("/Support/OpenSupport")
