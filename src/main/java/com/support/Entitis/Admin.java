@@ -13,7 +13,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Admin extends User {
+public class Admin extends Resever {
     static String privilage = "Admin";
     @Override
     public String getPrivilage() {

@@ -9,28 +9,50 @@
 </head>
 <body>
     <body>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Bullgin Support</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
 
-        <nav class="navbar navbar-light bg-light">
-            <form class="form-inline">
-                <div class="form-row align-items-center">
-                    <div class="col-auto my-1">
-                      
-             <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-                        <option selected>Choose...</option>
-                        <option value="1">Open</option>
-                        <option value="2">Closed</option>
-                        <option value="3">InProggres</option>
-                      </select>
-                    </div>
-              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
-          </nav>    
+
+
+            <li class="nav-item active">
+                <a class="nav-link" th:href="@{/Support/OpenSupport}"> Open Support Tikect<span class="sr-only">(current)</span></a>
+            </li>
+
+
+
+            <li class="nav-item active">
+                <a class="nav-link" th:href="@{/Support/ListSupport}"> Support Tikect  List <span class="sr-only">(current)</span></a>
+            </li>
+
+          
+          
+  
+          </ul>
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+          <form class="d-inline "  method="POST" th:action="@{/logout}" >  
+            <td ><button type="submit" th:text="${username}"  class="btn btn-primary ml-1">Take Ticket</button>  
+            </form>
+
+          <b></b>
+        </div>
+      </nav>
+
+
     
-          <table class="table">
-            <thead>
-              <tr>
-                
+      <b ></b>
+      <table class="table">
+        <thead>
+          <tr>
+            
                 <th scope="col">Machine ID</th>
                 <th scope="col">title</th>
                 <th scope="col">Level</th>
@@ -46,7 +68,7 @@
               <tr th:each="ticket: ${ticketList}" >
                
                 <td th:text="${ticket.machine.Id}">M1</td>
-                <td th:text="${ticket.Titel}">Electrical short</td>
+                <td th:text="${ticket.Titel}"></td>
                 <td>
                   <button  th:if="${ticket.Level.name()=='Low' }" type="button" class="btn btn-secondary  col-5" disabled>Low</button>
                   <button  th:if="${ticket.Level.name()=='Normal' }" type="button" class="btn btn-warning  col-5" disabled>Normal</button>
@@ -54,7 +76,7 @@
 
                   
                 </td>
-                <td>Electrical</td>
+                <td th:text="${ticket.breakdown.type}" >Electrical</td>
                 <td>
                   <button  th:if="${ticket.Status.name()=='Open' }" type="button" class="btn btn-primary  col-5" disabled>Open</button>
                   <button  th:if="${ticket.Status.name()=='Closed' }" type="button" class="btn btn col-5" disabled>Closed</button>
@@ -62,12 +84,15 @@
                 </td>
                 <div th:if="${ticket.Status.name()=='Open'  }">
 
-                  <form class="d-inline " method="POST" th:action="@{/Support/TakeSupport/{id}(id=${ticket.Id})}" >  
-                    <td ><button type="submit" class="btn btn-primary">Take Ticket</button>  
+                  <form class="d-inline "  method="POST" th:action="@{/Support/TakeSupport/{id}(id=${ticket.Id})}" >  
+                    <td ><button type="submit" th:if="${Auth=='Resever' || Auth=='Admin' }" class="btn btn-primary">Take Ticket</button>  
                     </form>
-                    <form  class="d-inline "  method="POST" th:action="@{/Support/DropeSupport/{id}(id=${ticket.Id})}">
-                    <button type="submit" class="btn btn-warning">Drope Ticket</button> 
+                    <form  class="d-inline "   method="POST" th:action="@{/Support/DropeSupport/{id}(id=${ticket.Id})}">
+                    <button type="submit" th:if="${ticket.user.username==username || Auth=='Resever' ||  Auth=='Admin'}" class="btn btn-warning">Drope Ticket</button> 
                     </form>
+                    <button type="button"  th:unless="${ticket.user.username==username || Auth=='Resever' || Auth=='Admin'}" class="btn btn-primary" disabled>Tiket is open</button> 
+
+
 
                 </div>
               
@@ -76,9 +101,9 @@
                   
                   
                 
-                <td th:if="${ticket.Status.name()=='InProgress' && !(ticket.Tecnesstion.Username==username)  }"><button type="button" class="btn btn-info col-5" disabled>Ticket is taken</button>  </td>
+                <td th:if="${ticket.Status.name()=='InProgress' && !(ticket.Tecnesstion.Username==username  ||  Auth =='Admin')  }"><button type="button" class="btn btn-info col-5" disabled>Ticket is taken</button>  </td>
                 <form  class="d-inline "  method="get" th:action="@{/Support/CloseSupport/{id}(id=${ticket.Id})}">
-                <td th:if="${ticket.Status.name()=='InProgress' && ticket.Tecnesstion.Username==username }"><button type="submit" class="btn btn-dark col-5" >Close Ticket</button>  </td>
+                <td th:if="${ticket.Status.name()=='InProgress' && (ticket.Tecnesstion.Username==username ||  Auth =='Admin' )} "><button type="submit" class="btn btn-dark col-5" >Close Ticket</button>  </td>
                 </form>
                 <td th:if="${ticket.Status.name()=='Closed' }"><button type="button" class="btn btn-success col-5" >More Info</button>  </td>
 

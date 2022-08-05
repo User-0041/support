@@ -31,7 +31,14 @@ public class SecurityConfiguration extends  WebSecurityConfigurerAdapter  {
     protected void configure(HttpSecurity http) throws Exception{
         http.authorizeRequests()
         .antMatchers("/").permitAll()
-        .antMatchers("/Support/OpenSupport").hasAnyAuthority("Admin","Resever","User").and().httpBasic().and().formLogin();
+        .antMatchers("/Support/OpenSupport").hasAnyAuthority("Admin","Resever","User")
+        .antMatchers("/Support/CloseSupport").hasAnyAuthority("Admin","Resever")
+        .antMatchers("/Support/TakeSupport/{id}").hasAnyAuthority("Admin","Resever")
+        .antMatchers("/Support/ListSupport").hasAnyAuthority("Admin","Resever","User")
+        .antMatchers("/static/**").permitAll()
+
+        .and()
+        .formLogin();
 
     }
 }

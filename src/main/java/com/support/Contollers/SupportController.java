@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.support.Entitis.Resever;
 import com.support.Entitis.Ticket;
-
+import com.support.Entitis.User;
 import com.support.Enums.Status;
 import com.support.Services.BreakDownService;
 import com.support.Services.MachineService;
@@ -72,11 +72,15 @@ public class SupportController {
     @PostMapping("/Support/DropeSupport/{id}")
     public String DropeSupport(@PathVariable("id") String id,Principal principal, Model model) {
         Optional<Ticket> t= TicketService.FindById(id);
-        if(t.isEmpty()){System.out.println("not found"); return "index";}
-        if((t.get().getTecnesstion().getUsername()==principal.getName())){ System.out.println("Not Yours");;return "index";};
+        if(t.isEmpty()){System.out.println("Not found"); return "index";}
+        if((t.get().getUser().getUsername()==principal.getName())){ System.out.println("Not Yours");;return "index";};
+        try{
+            if((t.get().getTecnesstion().getUsername()==principal.getName())){ System.out.println("Not Yours");;return "index";};
+        }catch(Exception e) {
+            TicketService.DropTicket(t.get());
+        }
 
        
-        TicketService.DropTicket(t.get());
         
 
         return "redirect:/";
@@ -102,12 +106,15 @@ public class SupportController {
     public String ListSupport(Model model,Principal principal) {
         model.addAttribute("ticketList",TicketService.FindAll(PageRequest.of(0,7)) );
         model.addAttribute("username",principal.getName() );
+        User user= UserService.findByUsername(principal.getName());
+        model.addAttribute("Auth",user.getPrivilage() );
+
         return "ListSupport";
     }
 
     @GetMapping
     public String Index(Principal principal,Model model){
-        return "Index";
+        return "";
     }
 
     @PostMapping("/Support/OpenSupport")

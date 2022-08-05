@@ -35,9 +35,12 @@ class SupportApplicationTests {
 	
 	@Test
 	void contextLoads() {
-		User a2 = new Resever("Resever-2","$2a$12$YZfY8uQBsUsA2GcPbzrZCe4xK/3oTBgxYkir0TK/6E1xfxVOSv1eG");
-		UserRepositorie.save(a2);
-	}
+		Admin admin= new Admin();
+		User u= (User) admin;
+		Resever r =(Resever) u;
+		System.out.println(r.getClass());
+
+	}	
 	@Test
 	void Repositories(){
 		User u1 = new User("User","$2a$12$s.nKYeuQIb/Jh3WHSsA.7OYDASy0HUAvJxKNU4go08hQ3NsqoUj2K");
