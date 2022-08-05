@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.support.Entitis.Resever;
 import com.support.Entitis.Ticket;
-import com.support.Entitis.User;
 
 import com.support.Enums.Status;
 import com.support.Services.BreakDownService;
