@@ -17,17 +17,17 @@
           
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav mr-auto">
-
-
-
+    
+    
+    
                 <li class="nav-item active">
-                    <a class="nav-link" th:href="@{/Support/OpenSupport}">Support Tikect  List<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" th:href="@{/Support/OpenSupport}"> Open Support Tikect<span class="sr-only">(current)</span></a>
                 </li>
-
-
-                
+    
+    
+    
                 <li class="nav-item active">
-                    <a class="nav-link" th:href="@{/Support/ListSupport}">Open Support Tikect <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" th:href="@{/Support/ListSupport}"> Support Tikect  List <span class="sr-only">(current)</span></a>
                 </li>
     
               
@@ -37,9 +37,10 @@
               <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                <button class="btn btn-outline-success my-2 my-sm-0 m-3"  type="button" >User</button>
-    
               </form>
+              <form class="d-inline "  method="POST" th:action="@{/logout}" >  
+                <td ><button type="submit" th:text="${username}"  class="btn btn-primary ml-1">Take Ticket</button>  
+                </form>
     
               <b></b>
             </div>
