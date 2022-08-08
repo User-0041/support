@@ -19,9 +19,13 @@ import lombok.Setter;
 @Setter
 public class Machine {
     @Id
-    String Id;
+    String id;
     @ManyToOne
     MachineFamily family;
     @OneToMany
-    List<Ticket> Tickets;
+    List<Ticket> tickets;
+
+    public Machine(String Id){
+        this.id = Id;
+    }
 }

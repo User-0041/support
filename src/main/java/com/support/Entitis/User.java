@@ -20,7 +20,7 @@ import lombok.Setter;
 public class User {
     @Id
     String username;
-    String Password;
+    String password;
     static String privilage = "User";
     public  String getPrivilage() {
         return privilage;

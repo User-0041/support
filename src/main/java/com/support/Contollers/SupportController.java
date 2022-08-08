@@ -1,12 +1,15 @@
 package com.support.Contollers;
 
 import java.security.Principal;
+import java.util.List;
 import java.util.Optional;
-
-
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+        
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +30,7 @@ import com.support.Services.MachineService;
 import com.support.Services.TicketService;
 import com.support.Services.UserService;
 import com.support.Utils.Utils;
+
 
 
 
@@ -65,7 +69,7 @@ public class SupportController {
         t.get().setStatus(Status.InProgress);
         TicketService.CloseTicket(t.get());
 
-        return "redirect:/";
+        return "index";
     }
 
 
@@ -100,15 +104,31 @@ public class SupportController {
         t.get().setCloseDate(Utils.CurrentDate());
         t.get().setStatus(Status.Closed);
         TicketService.CloseTicket(t.get());
-        return "index";
+            return "index";
     }
 
     @GetMapping("/Support/ListSupport")
-    public String ListSupport(Model model,Principal principal) {
-        model.addAttribute("ticketList",TicketService.FindAll(PageRequest.of(0,7)) );
+    public String ListSupport(Model model, @RequestParam("page") Optional<Integer> page,String keyword,Principal principal) {
+
+
+    
+        int currentPage = page.orElse(0);
+        Page<Ticket> Tikets= TicketService.FindAll(PageRequest.of(currentPage,7));
+        if(keyword != null  ){Tikets= TicketService.FindBySearch(keyword,PageRequest.of(currentPage,7));};
+        model.addAttribute("ticketList",Tikets );
         model.addAttribute("username",principal.getName() );
         User user= UserService.findByUsername(principal.getName());
         model.addAttribute("Auth",user.getPrivilage() );
+
+
+        int totalPages = Tikets.getTotalPages();
+        if (totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(0, totalPages-1)
+                .boxed()
+                .collect(Collectors.toList());
+            model.addAttribute("pageNumbers", pageNumbers);
+        }
+
 
         return "ListSupport";
     }

@@ -20,12 +20,12 @@ import lombok.Setter;
 public class MachineFamily {
     @Id
     String id;
-    String Name;
+    String name;
     @OneToMany(mappedBy="family")
-    List<Machine> Machines;
+    List<Machine> machines;
 
     public MachineFamily(String Id, String Name){
         this.id=Id;
-        this.Name=Name;
+        this.name=Name;
     }
 }

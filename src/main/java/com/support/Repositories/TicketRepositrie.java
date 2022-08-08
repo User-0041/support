@@ -20,4 +20,5 @@ public interface TicketRepositrie extends JpaRepository<Ticket , String> {
     Page<Ticket> findByUser(User u,Pageable pageable);
     Page<Ticket> findByLevel(Level l,Pageable pageable);
     Optional <Ticket> findById(String id);
+    Page<Ticket> findByMachineIdStartingWith(String key,Pageable pageable);
 }

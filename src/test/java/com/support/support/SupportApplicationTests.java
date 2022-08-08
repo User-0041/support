@@ -4,9 +4,14 @@ package com.support.support;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
 import com.support.Entitis.Admin;
+import com.support.Entitis.Machine;
+import com.support.Entitis.MachineFamily;
 import com.support.Entitis.Resever;
+import com.support.Entitis.Ticket;
 import com.support.Entitis.User;
 import com.support.Repositories.BreakdownRepositorie;
 import com.support.Repositories.MachineFamilyRepositorie;
@@ -41,6 +46,16 @@ class SupportApplicationTests {
 		System.out.println(r.getClass());
 
 	}	
+
+
+	@Test
+	void FindByTest() {
+	
+		Page<Ticket> p = TicketRepositrie.findByMachineIdStartingWith("M",PageRequest.of(0,7));
+		System.out.println(p);
+	}
+
+
 	@Test
 	void Repositories(){
 		User u1 = new User("User","$2a$12$s.nKYeuQIb/Jh3WHSsA.7OYDASy0HUAvJxKNU4go08hQ3NsqoUj2K");

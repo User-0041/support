@@ -70,4 +70,9 @@ public class TicketService implements TicketInterface{
         return TicketRepositrie.findById(id);
     }
 
+    @Override
+    public Page<Ticket> FindBySearch(String key, Pageable pageable) {
+        return TicketRepositrie.findByMachineIdStartingWith(key, pageable);
+    }
+
 }

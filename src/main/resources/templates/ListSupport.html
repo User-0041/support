@@ -6,7 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+
 </head>
+
+
 <body>
     <body>
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -34,8 +37,9 @@
           
   
           </ul>
-          <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          
+          <form  method="GET" th:action="@{/Support/ListSupport/}" class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2"   name="keyword" th:value="${keyword}"  type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
           </form>
           <form class="d-inline "  method="POST" th:action="@{/logout}" >  
@@ -114,7 +118,8 @@
               </tr>
             </tbody>
           </table>
-          <nav aria-label="Page navigation example">
+          <nav aria-label="Page navigation example" th:if="${ticketList.totalPages > 0}" >
+        
             <ul class="pagination">
               <li class="page-item">
                 <a class="page-link" href="#" aria-label="Previous">
@@ -122,9 +127,8 @@
                   <span class="sr-only">Previous</span>
                 </a>
               </li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li   th:each="pageNumber : ${pageNumbers}"  th:class="${pageNumber==ticketList.number } ? 'page-item active' :'page-item'"  class=""><a th:href="@{/Support/ListSupport(page=${pageNumber})}" th:text="${pageNumber}" class="page-link " >1</a></li>
+      
               <li class="page-item">
                 <a class="page-link" href="#" aria-label="Next">
                   <span aria-hidden="true">&raquo;</span>

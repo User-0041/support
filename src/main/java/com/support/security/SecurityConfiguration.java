@@ -30,6 +30,7 @@ public class SecurityConfiguration extends  WebSecurityConfigurerAdapter  {
     protected void configure(HttpSecurity http) throws Exception{
         http.authorizeRequests()
         .antMatchers("/").permitAll()
+        .antMatchers("/webjars/**").permitAll()
         .antMatchers("/Support/OpenSupport").hasAnyAuthority("Admin","Resever","User")
         .antMatchers("/Support/CloseSupport").hasAnyAuthority("Admin","Resever")
         .antMatchers("/Support/TakeSupport/{id}").hasAnyAuthority("Admin","Resever")
@@ -42,4 +43,6 @@ public class SecurityConfiguration extends  WebSecurityConfigurerAdapter  {
         ;
 
     }
+
+    
 }
