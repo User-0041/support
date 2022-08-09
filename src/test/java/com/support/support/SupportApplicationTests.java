@@ -1,18 +1,22 @@
 
 package com.support.support;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-
+import org.springframework.data.domain.Pageable;
 import com.support.Entitis.Admin;
 import com.support.Entitis.Machine;
 import com.support.Entitis.MachineFamily;
 import com.support.Entitis.Resever;
 import com.support.Entitis.Ticket;
 import com.support.Entitis.User;
+import com.support.Enums.Status;
+import com.support.ReposetryPorxy.TicketRepositrieProxySort;
 import com.support.Repositories.BreakdownRepositorie;
 import com.support.Repositories.MachineFamilyRepositorie;
 import com.support.Repositories.MachineRepositorie;
@@ -21,6 +25,7 @@ import com.support.Repositories.TicketRepositrie;
 
 
 import com.support.Repositories.UserRepositorie;
+import com.support.Services.TicketService;
 
 
 @SpringBootTest
@@ -37,6 +42,10 @@ class SupportApplicationTests {
 	BreakdownRepositorie BreakdownRepositorie; 
 	@Autowired
 	TicketRepositrie TicketRepositrie; 
+	@Autowired
+	TicketService TicketService;
+	@Autowired
+	TicketRepositrieProxySort TicketRepositrieProxySort; 
 	
 	@Test
 	void contextLoads() {
@@ -50,9 +59,8 @@ class SupportApplicationTests {
 
 	@Test
 	void FindByTest() {
-	
-		Page<Ticket> p = TicketRepositrie.findByMachineIdStartingWith("M",PageRequest.of(0,7));
-		System.out.println(p);
+		List<Ticket> t =  TicketRepositrieProxySort.getList("Status","M7");
+		System.out.println(t);
 	}
 
 

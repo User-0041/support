@@ -108,13 +108,15 @@ public class SupportController {
     }
 
     @GetMapping("/Support/ListSupport")
-    public String ListSupport(Model model, @RequestParam("page") Optional<Integer> page,String keyword,Principal principal) {
+    public String ListSupport(Model model, @RequestParam("page") Optional<Integer> page,@RequestParam("sort") Optional<String> Sort ,@RequestParam(required = false)Optional<String> keyword,Principal principal) {
 
+        
+ 
 
-    
         int currentPage = page.orElse(0);
-        Page<Ticket> Tikets= TicketService.FindAll(PageRequest.of(currentPage,7));
-        if(keyword != null  ){Tikets= TicketService.FindBySearch(keyword,PageRequest.of(currentPage,7));};
+        
+        Page<Ticket>  Tikets= TicketService.FindByFilters("Level",null,"",PageRequest.of(0,10));
+
         model.addAttribute("ticketList",Tikets );
         model.addAttribute("username",principal.getName() );
         User user= UserService.findByUsername(principal.getName());

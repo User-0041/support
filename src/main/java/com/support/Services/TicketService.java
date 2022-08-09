@@ -1,11 +1,14 @@
 package com.support.Services;
 
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +16,8 @@ import com.support.Entitis.Machine;
 import com.support.Entitis.Ticket;
 import com.support.Entitis.User;
 import com.support.Enums.Level;
+import com.support.Enums.Status;
+import com.support.ReposetryPorxy.TicketProxyrPage;
 import com.support.Repositories.TicketRepositrie;
 import com.support.Servicesinterfaces.TicketInterface;
 
@@ -22,6 +27,8 @@ import com.support.Servicesinterfaces.TicketInterface;
 public class TicketService implements TicketInterface{
     @Autowired
     TicketRepositrie TicketRepositrie;
+    @Autowired
+    TicketProxyrPage TicketProxyrPage;
 
 
     @Override
@@ -71,8 +78,14 @@ public class TicketService implements TicketInterface{
     }
 
     @Override
-    public Page<Ticket> FindBySearch(String key, Pageable pageable) {
+    public Page<Ticket> FindBySearch(String key, Pageable pageable ) {
         return TicketRepositrie.findByMachineIdStartingWith(key, pageable);
     }
+    
+    public Page<Ticket> FindByFilters(String Sort , Status status , String Key,Pageable pageable){
+    return TicketProxyrPage.getList(Sort, status, Key, pageable);
+ 
+    }
+ 
 
 }

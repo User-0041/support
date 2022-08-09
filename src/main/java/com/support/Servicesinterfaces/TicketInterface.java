@@ -19,6 +19,7 @@ public interface TicketInterface {
     Page<Ticket> FindByUser(User u,Pageable pageable);
     Page<Ticket> FindByLevel(Level l,Pageable pageable);
     Page<Ticket> FindBySearch(String Key,Pageable pageable);
+  
 
     Optional<Ticket> FindById(String id);
 

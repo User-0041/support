@@ -28,7 +28,7 @@ import lombok.ToString;
 @ToString
 @Getter
 @Setter
-public class Ticket {
+public class Ticket  {
 @Id
 @GeneratedValue(generator = "uuid")
 @GenericGenerator(name = "uuid", strategy = "uuid2")
@@ -53,7 +53,8 @@ String titel;
 
 String descrption;
 String observetion;
-Status status;  
+Status status;
+
 
 }
 
