@@ -74,6 +74,7 @@ public class SupportController {
         if(t.isEmpty()){return "index";}
         t.get().setTecnesstion((Resever) UserService.findByUsername(principal.getName()));        
         t.get().setStatus(Status.InProgress);
+        t.get().setTakeDate(Utils.CurrentDate());
         TicketService.CloseTicket(t.get());
 
         return "redirect:/Support/ListSupport";

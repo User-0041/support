@@ -38,7 +38,9 @@ User user;
 @ManyToOne
 Resever tecnesstion;
 Date issueDate;
+Date takeDate;
 Date closeDate;
+
 @NotNull(message = "Machine not found")
 @ManyToOne
 Machine machine;
