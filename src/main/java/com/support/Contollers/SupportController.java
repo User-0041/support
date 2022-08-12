@@ -1,11 +1,9 @@
 package com.support.Contollers;
 
 import java.security.Principal;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
         
@@ -122,8 +120,6 @@ public class SupportController {
     public String ListSupport(Model model,@RequestParam("sort") Optional<String> sort,@RequestParam("filter") Optional<String> status,@RequestParam("page") Optional<Integer> page,@RequestParam("sort") Optional<String> Sort ,@RequestParam(required = false)Optional<String> keyword,Principal principal) {
 
         System.out.println(sort.orElse(""));
-        String s =null;
-        
 
         
         Page<Ticket>  Tikets= TicketService.FindByFilters(sort.orElse(""),status.orElse(""),keyword.orElse(""),PageRequest.of(page.orElse(0),7));
