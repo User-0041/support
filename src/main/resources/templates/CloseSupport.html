@@ -6,16 +6,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+    	
+	<link rel="stylesheet" href="/Time/css/style.css">
+	<link rel="stylesheet" href="/Time/css/bootstrap-datetimepicker.min.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
+
 </head>
 <body>
     <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">Bullgin Support</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+    
+    
+    
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/Support/OpenSupport}"> Open Support Ticket<span class="sr-only">(current)</span></a>
+                </li>
+    
+    
+    
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/Support/ListSupport}"> Support Ticket  List <span class="sr-only">(current)</span></a>
+                </li>
+    
+              
+              
+      
+              </ul>
+    
+              <form class="d-inline "  method="POST" th:action="@{/logout}" >  
+                <td ><button type="submit" th:text="${username}"  class="btn btn-primary ml-1">Take Ticket</button>  
+                </form>
+    
+              <b></b>
+            </div>
+          </nav>
         <div class="container">
             <h1>Close Ticket Support Ticket</h1>
-            <form class="needs-validation" method="post" th:action="@{/Support/CloseSupport/{id}(id=5) }" novalidate>
+            <form class="needs-validation" method="post" th:action="@{/Support/CloseSupport }" novalidate>
                 <div class="form-row">
                     <div class="col-md-7 mb-3">
                         <label for="prenom">DESCREPTION</label>
-                        <textarea class="form-control" name="DESCREPTION" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        <input type="hidden" name="ID"   th:value="${Tid}">
+                        <textarea class="form-control" name="DESCREPTION"  rows="3"></textarea>
                         <div class="valid-feedback">Ok !</div>
                         <div class="invalid-feedback">Valeur incorrecte</div>
                         
@@ -24,13 +66,18 @@
                 <div class="form-row">
                     <div class="col-md-7 mb-3">
                         <label for="prenom">OBSERVATION</label>
-                        <textarea class="form-control" name="OBSERVATION" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        <textarea class="form-control" name="OBSERVATION"  rows="3"></textarea>
                         <div class="valid-feedback">Ok !</div>
                         <div class="invalid-feedback">Valeur incorrecte</div>
-                        
                     </div>
                 </div>
         
+                <div class="form-row">
+                  <div class="input-group date col-md-7 mb-3" id="id_0">
+                    <input type="text" name="date" class="form-control" placeholder="MM/DD/YYYY hh:mm:ss" required/>
+                  </div>
+                </div>
+            
 
                 <button class="btn btn-primary" type="submit">Envoyer</button>
                 <button class="btn btn-Secondery" type="reset">Reset</button>
@@ -38,5 +85,12 @@
             </form>
         </div>
    </body>
+   
+<script src="/Time/js/jquery.min.js"></script>
+<script src="/Time/js/popper.js"></script>
+<script src="/Time/js/bootstrap.min.js"></script>
+<script src="/Time/js/moment-with-locales.min.js"></script>
+<script src="/Time/js/bootstrap-datetimepicker.min.js"></script>
+<script src="/Time/js/main.js"></script>
 </body>
 </html>

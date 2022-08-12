@@ -1,7 +1,9 @@
 package com.support.Services;
 
 
+
 import java.util.Optional;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,6 +15,8 @@ import com.support.Entitis.Machine;
 import com.support.Entitis.Ticket;
 import com.support.Entitis.User;
 import com.support.Enums.Level;
+
+import com.support.ReposetryPorxy.TicketProxyrPage;
 import com.support.Repositories.TicketRepositrie;
 import com.support.Servicesinterfaces.TicketInterface;
 
@@ -22,6 +26,8 @@ import com.support.Servicesinterfaces.TicketInterface;
 public class TicketService implements TicketInterface{
     @Autowired
     TicketRepositrie TicketRepositrie;
+    @Autowired
+    TicketProxyrPage TicketProxyrPage;
 
 
     @Override
@@ -69,5 +75,17 @@ public class TicketService implements TicketInterface{
         
         return TicketRepositrie.findById(id);
     }
+
+    @Override
+    public Page<Ticket> FindBySearch(String key, Pageable pageable ) {
+        return TicketRepositrie.findByMachineIdStartingWith(key, pageable);
+    }
+    
+    public Page<Ticket> FindByFilters(String Sort , String status , String Key,Pageable pageable){
+        System.out.println(Sort);
+    return TicketProxyrPage.getList(Sort, status, Key, pageable);
+ 
+    }
+ 
 
 }

@@ -6,63 +6,130 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+
 </head>
+
+
 <body>
     <body>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Bullgin Support</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
 
-        <nav class="navbar navbar-light bg-light">
-            <form class="form-inline">
-                <div class="form-row align-items-center">
-                    <div class="col-auto my-1">
-                      
-             <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-                        <option selected>Choose...</option>
-                        <option value="1">Open</option>
-                        <option value="2">Closed</option>
-                        <option value="3">InProggres</option>
-                      </select>
-                    </div>
-              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
-          </nav>    
+
+
+            <li class="nav-item active">
+                <a class="nav-link" th:href="@{/Support/OpenSupport}"> Open Support Ticket<span class="sr-only">(current)</span></a>
+            </li>
+
+
+
+            <li class="nav-item active">
+                <a class="nav-link" th:href="@{/Support/ListSupport}"> Support Ticket  List <span class="sr-only">(current)</span></a>
+            </li>
+
+          
+          
+  
+          </ul>
+          
+          <form  method="GET" th:action="@{/Support/ListSupport/}" class="form-inline my-2 my-lg-0">
+
+           
+            <select  name="sort" th:value="${sort}"  class="form-control ml-1 mr-1">
+              <option value="" th:selected="${sort==''}" >All</option>
+              <option value="Date" th:selected="${sort=='Date'}" >Date</option>
+              <option value="Status" th:selected="${sort=='Status'}" >Status</option>
+              <option value="Level" th:selected="${sort=='Level'}" >Level</option>             
+
+            </select>
+          
+            <select    name="filter" th:value="${filter}"  class="form-control ml-1 mr-1">
+              <option value=""  th:selected="${filter==''}" >All</option>
+              <option value="Open" th:selected="${filter=='Open'}" >Open</option>
+              <option value="InProgress" th:selected="${filter=='InProgress'}">InProgress</option>
+              <option value="Closed" th:selected="${filter=='Closed'}">Closed</option>
+            </select>
+            <input class="form-control mr-sm-2"   name="keyword" th:value="${keyword}"   type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+          <form class="d-inline "  method="POST" th:action="@{/logout}" >  
+            <td ><button type="submit" th:text="${username}"  class="btn btn-primary ml-1">Take Ticket</button>  
+            </form>
+
+          <b></b>
+        </div>
+      </nav>
+
+
     
-          <table class="table">
-            <thead>
-              <tr>
-                
+      <b ></b>
+      <table class="table">
+        <thead>
+          <tr>
+            
                 <th scope="col">Machine ID</th>
-                <th scope="col">title</th>
+                <th scope="col">Title</th>
                 <th scope="col">Level</th>
-                <th scope="col">breakdown</th>
-                <th scope="col">status</th>
+                <th scope="col">Breakdown</th>
+                <th scope="col">Status</th>
                 <th scope="col">Actions</th>
 
 
 
               </tr>
             </thead>
+            <h1  > </h1>
+         
             <tbody>
-              <tr th:each="ticket: ${ticketList}" >
-               
+              <tr   th:if="${ticketList.getNumberOfElements()!=0}" th:each="ticket: ${ticketList}" >
                 <td th:text="${ticket.machine.Id}">M1</td>
-                <td th:text="${ticket.Titel}">Electrical short</td>
+                <td th:text="${ticket.Titel}"></td>
                 <td>
                   <button  th:if="${ticket.Level.name()=='Low' }" type="button" class="btn btn-secondary  col-5" disabled>Low</button>
                   <button  th:if="${ticket.Level.name()=='Normal' }" type="button" class="btn btn-warning  col-5" disabled>Normal</button>
                   <button  th:if="${ticket.Level.name()=='Critical' }" type="button" class="btn btn-danger  col-5" disabled>Critical</button>
-
+                  
                   
                 </td>
-                <td>Electrical</td>
+                <td th:text="${ticket.breakdown.type}" >Electrical</td>
                 <td>
                   <button  th:if="${ticket.Status.name()=='Open' }" type="button" class="btn btn-primary  col-5" disabled>Open</button>
                   <button  th:if="${ticket.Status.name()=='Closed' }" type="button" class="btn btn col-5" disabled>Closed</button>
                   <button  th:if="${ticket.Status.name()=='InProgress' }" type="button" class="btn btn-warning  col-5" disabled>InProgress</button>
                 </td>
-                <td th:if="${ticket.Status.name()=='Open' }"><button type="button" class="btn btn-primary">Take Ticket</button>  <button type="button" class="btn btn-warning">Drope Ticket</button> </td>
-                <td th:if="${ticket.Status.name()=='InProgress' }"><button type="button" class="btn btn-info col-5" disabled>Ticket is taken</button>  </td>
-                <td th:if="${ticket.Status.name()=='Closed' }"><button type="button" class="btn btn-success col-5" >Ticket is Closed</button>  </td>
+                <div th:if="${ticket.Status.name()=='Open'  }">
+          
+                  <form class="d-inline "  method="POST" th:action="@{/Support/TakeSupport/{id}(id=${ticket.Id})}" >  
+                    <td ><button type="submit" th:if="${Auth=='Resever' || Auth=='Admin' }" class="btn btn-primary">Take Ticket</button>  
+                    </form>
+                    <form  class="d-inline "   method="POST" th:action="@{/Support/DropeSupport/{id}(id=${ticket.Id})}">
+                      <button type="submit" th:if="${ticket.user.username==username || Auth=='Resever' ||  Auth=='Admin'}" class="btn btn-warning">Drope Ticket</button> 
+                    </form>
+                    <button type="button"  th:unless="${ticket.user.username==username || Auth=='Resever' || Auth=='Admin'}" class="btn btn-primary" disabled>Ticket is open</button> 
+                    
+                
+
+
+                </div>
+              
+              
+              </td>
+                  
+                  
+                
+                <td th:if="${ticket.Status.name()=='InProgress' && !(ticket.Tecnesstion.Username==username  ||  Auth =='Admin')  }"><button type="button" class="btn btn-info col-5" disabled>Ticket is taken</button>  </td>
+                <form  class="d-inline "  method="get" th:action="@{/Support/CloseSupport/{id}(id=${ticket.Id})}">
+                <td th:if="${ticket.Status.name()=='InProgress' && (ticket.Tecnesstion.Username==username ||  Auth =='Admin' )} "><button type="submit" class="btn btn-dark col-5" >Close Ticket</button>  </td>
+                </form>
+                <form  class="d-inline "  method="get" th:action="@{/Support/MoreInfo/{id}(id=${ticket.Id})}">
+                <td th:if="${ticket.Status.name()=='Closed' }"><button type="submit" class="btn btn-success col-5" >More Info</button>  </td>
+              </form>
 
               
 
@@ -71,7 +138,9 @@
               </tr>
             </tbody>
           </table>
-          <nav aria-label="Page navigation example">
+          <h1 th:if="${ticketList.getNumberOfElements()==0}" class="text-center">This table is empty :[ </h1>
+          <nav aria-label="Page navigation example" th:if="${ticketList.totalPages > 0}" >
+            
             <ul class="pagination">
               <li class="page-item">
                 <a class="page-link" href="#" aria-label="Previous">
@@ -79,9 +148,8 @@
                   <span class="sr-only">Previous</span>
                 </a>
               </li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li   th:each="pageNumber : ${pageNumbers}"  th:class="${pageNumber==ticketList.number } ? 'page-item active' :'page-item'"  class=""><a th:href="@{/Support/ListSupport(page=${pageNumber})}" th:text="${pageNumber}" class="page-link " >1</a></li>
+      
               <li class="page-item">
                 <a class="page-link" href="#" aria-label="Next">
                   <span aria-hidden="true">&raquo;</span>

@@ -28,17 +28,19 @@ import lombok.ToString;
 @ToString
 @Getter
 @Setter
-public class Ticket {
+public class Ticket  {
 @Id
 @GeneratedValue(generator = "uuid")
 @GenericGenerator(name = "uuid", strategy = "uuid2")
-String Id;
+String id;
 @ManyToOne
 User user;
 @ManyToOne
-Resever Tecnesstion;
-Date IssueDate;
+Resever tecnesstion;
+Date issueDate;
+Date takeDate;
 Date closeDate;
+
 @NotNull(message = "Machine not found")
 @ManyToOne
 Machine machine;
@@ -48,12 +50,13 @@ Breakdown breakdown;
 Level level;
 @NotEmpty(message = "Titel empty")
 @NotNull(message = "Titel empty")
-String Titel;
+String titel;
 
 
-String Descrption;
-String Observetion;
-Status status;  
+String descrption;
+String observetion;
+Status status;
+
 
 }
 

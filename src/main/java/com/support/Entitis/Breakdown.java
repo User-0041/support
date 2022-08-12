@@ -15,6 +15,6 @@ import lombok.Setter;
 @Setter
 public class Breakdown {
     @Id
-String Id ;
-String Type;
+String id ;
+String type;
 }

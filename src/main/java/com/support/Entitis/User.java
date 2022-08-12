@@ -19,9 +19,12 @@ import lombok.Setter;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class User {
     @Id
-    String Username;
-    String Password;
+    String username;
+    String password;
     static String privilage = "User";
+    public  String getPrivilage() {
+        return privilage;
+    }
 
 
 }

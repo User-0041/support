@@ -1,0 +1,94 @@
+Date : 2022-08-08 00:48:11
+Directory : d:\Support\support
+Total : 42 files,  1229 codes, 67 comments, 381 blanks, all 1677 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| Java       |         32 |        678 |         16 |        233 |        927 |
+| HTML       |          5 |        273 |          0 |         91 |        364 |
+| Batch      |          1 |        102 |         51 |         36 |        189 |
+| XML        |          1 |         88 |          0 |          5 |         93 |
+| CSS        |          1 |         81 |          0 |         13 |         94 |
+| Properties |          2 |          7 |          0 |          3 |         10 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++---------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                        | files      | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                           |         42 |      1,229 |         67 |        381 |      1,677 |
+| .mvn                                                                                        |          1 |          2 |          0 |          1 |          3 |
+| .mvn\wrapper                                                                                |          1 |          2 |          0 |          1 |          3 |
+| src                                                                                         |         39 |      1,037 |         16 |        339 |      1,392 |
+| src\main                                                                                    |         38 |        988 |         16 |        328 |      1,332 |
+| src\main\java                                                                               |         31 |        629 |         16 |        222 |        867 |
+| src\main\java\com                                                                           |         31 |        629 |         16 |        222 |        867 |
+| src\main\java\com\support                                                                   |         31 |        629 |         16 |        222 |        867 |
+| src\main\java\com\support\Contollers                                                        |          1 |        102 |          1 |         38 |        141 |
+| src\main\java\com\support\Entitis                                                           |          7 |        177 |          0 |         51 |        228 |
+| src\main\java\com\support\Enums                                                             |          2 |          8 |          0 |          4 |         12 |
+| src\main\java\com\support\Repositories                                                      |          6 |         54 |          0 |         24 |         78 |
+| src\main\java\com\support\Services                                                          |          4 |        119 |          3 |         50 |        172 |
+| src\main\java\com\support\Servicesinterfaces                                                |          6 |         52 |          0 |         22 |         74 |
+| src\main\java\com\support\Utils                                                             |          1 |          9 |          0 |          3 |         12 |
+| src\main\java\com\support\security                                                          |          3 |         95 |         12 |         28 |        135 |
+| src\main\resources                                                                          |          7 |        359 |          0 |        106 |        465 |
+| src\main\resources\static                                                                   |          1 |         81 |          0 |         13 |         94 |
+| src\main\resources\templates                                                                |          5 |        273 |          0 |         91 |        364 |
+| src\test                                                                                    |          1 |         49 |          0 |         11 |         60 |
+| src\test\java                                                                               |          1 |         49 |          0 |         11 |         60 |
+| src\test\java\com                                                                           |          1 |         49 |          0 |         11 |         60 |
+| src\test\java\com\support                                                                   |          1 |         49 |          0 |         11 |         60 |
+| src\test\java\com\support\support                                                           |          1 |         49 |          0 |         11 |         60 |
++---------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++---------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                                    | language   | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| d:\Support\support\.mvn\wrapper\maven-wrapper.properties                                    | Properties |          2 |          0 |          1 |          3 |
+| d:\Support\support\mvnw.cmd                                                                 | Batch      |        102 |         51 |         36 |        189 |
+| d:\Support\support\pom.xml                                                                  | XML        |         88 |          0 |          5 |         93 |
+| d:\Support\support\src\main\java\com\support\Contollers\SupportController.java              | Java       |        102 |          1 |         38 |        141 |
+| d:\Support\support\src\main\java\com\support\Entitis\Admin.java                             | Java       |         20 |          0 |          8 |         28 |
+| d:\Support\support\src\main\java\com\support\Entitis\Breakdown.java                         | Java       |         17 |          0 |          4 |         21 |
+| d:\Support\support\src\main\java\com\support\Entitis\Machine.java                           | Java       |         23 |          0 |          5 |         28 |
+| d:\Support\support\src\main\java\com\support\Entitis\MachineFamily.java                     | Java       |         25 |          0 |          7 |         32 |
+| d:\Support\support\src\main\java\com\support\Entitis\Resever.java                           | Java       |         19 |          0 |          8 |         27 |
+| d:\Support\support\src\main\java\com\support\Entitis\Ticket.java                            | Java       |         49 |          0 |         12 |         61 |
+| d:\Support\support\src\main\java\com\support\Entitis\User.java                              | Java       |         24 |          0 |          7 |         31 |
+| d:\Support\support\src\main\java\com\support\Enums\Level.java                               | Java       |          4 |          0 |          2 |          6 |
+| d:\Support\support\src\main\java\com\support\Enums\Status.java                              | Java       |          4 |          0 |          2 |          6 |
+| d:\Support\support\src\main\java\com\support\Repositories\BreakdownRepositorie.java         | Java       |          7 |          0 |          3 |         10 |
+| d:\Support\support\src\main\java\com\support\Repositories\MachineFamilyRepositorie.java     | Java       |          7 |          0 |          4 |         11 |
+| d:\Support\support\src\main\java\com\support\Repositories\MachineRepositorie.java           | Java       |          7 |          0 |          3 |         10 |
+| d:\Support\support\src\main\java\com\support\Repositories\ReseverRepository.java            | Java       |          7 |          0 |          4 |         11 |
+| d:\Support\support\src\main\java\com\support\Repositories\TicketRepositrie.java             | Java       |         18 |          0 |          6 |         24 |
+| d:\Support\support\src\main\java\com\support\Repositories\UserRepositorie.java              | Java       |          8 |          0 |          4 |         12 |
+| d:\Support\support\src\main\java\com\support\Services\BreakDownService.java                 | Java       |         23 |          0 |          8 |         31 |
+| d:\Support\support\src\main\java\com\support\Services\MachineService.java                   | Java       |         23 |          0 |          7 |         30 |
+| d:\Support\support\src\main\java\com\support\Services\TicketService.java                    | Java       |         49 |          0 |         24 |         73 |
+| d:\Support\support\src\main\java\com\support\Services\UserService.java                      | Java       |         24 |          3 |         11 |         38 |
+| d:\Support\support\src\main\java\com\support\Servicesinterfaces\BreakdownInterface.java     | Java       |          8 |          0 |          3 |         11 |
+| d:\Support\support\src\main\java\com\support\Servicesinterfaces\MachineFamilyInterface.java | Java       |          6 |          0 |          3 |          9 |
+| d:\Support\support\src\main\java\com\support\Servicesinterfaces\MachineInterface.java       | Java       |          6 |          0 |          2 |          8 |
+| d:\Support\support\src\main\java\com\support\Servicesinterfaces\ReseverInterface.java       | Java       |          6 |          0 |          3 |          9 |
+| d:\Support\support\src\main\java\com\support\Servicesinterfaces\TicketInterface.java        | Java       |         18 |          0 |          8 |         26 |
+| d:\Support\support\src\main\java\com\support\Servicesinterfaces\UserInterface.java          | Java       |          8 |          0 |          3 |         11 |
+| d:\Support\support\src\main\java\com\support\SupportApplication.java                        | Java       |         13 |          0 |          2 |         15 |
+| d:\Support\support\src\main\java\com\support\Utils\Utils.java                               | Java       |          9 |          0 |          3 |         12 |
+| d:\Support\support\src\main\java\com\support\security\SecurityConfiguration.java            | Java       |         32 |          8 |          5 |         45 |
+| d:\Support\support\src\main\java\com\support\security\SupportUserDetails.java               | Java       |         43 |          4 |         18 |         65 |
+| d:\Support\support\src\main\java\com\support\security\UserDetailsServiceImp.java            | Java       |         20 |          0 |          5 |         25 |
+| d:\Support\support\src\main\resources\application.properties                                | Properties |          5 |          0 |          2 |          7 |
+| d:\Support\support\src\main\resources\static\styles.css                                     | CSS        |         81 |          0 |         13 |         94 |
+| d:\Support\support\src\main\resources\templates\CloseSupport.html                           | HTML       |         62 |          0 |         17 |         79 |
+| d:\Support\support\src\main\resources\templates\Index.html                                  | HTML       |         15 |          0 |          4 |         19 |
+| d:\Support\support\src\main\resources\templates\ListSupport.html                            | HTML       |        103 |          0 |         40 |        143 |
+| d:\Support\support\src\main\resources\templates\OpenSupport.html                            | HTML       |         76 |          0 |         27 |        103 |
+| d:\Support\support\src\main\resources\templates\__error.html                                | HTML       |         17 |          0 |          3 |         20 |
+| d:\Support\support\src\test\java\com\support\support\SupportApplicationTests.java           | Java       |         49 |          0 |         11 |         60 |
+| Total                                                                                       |            |      1,229 |         67 |        381 |      1,677 |
++---------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+

@@ -13,4 +13,14 @@ public class Resever extends User {
     public Resever(String Username,String password){
         super(Username,password);
     }
+
+    @Override
+    public String getPrivilage() {
+                return privilage;
+    }
+
+    @Override
+    public String getUsername() {
+                return super.getUsername();
+    }
 }
