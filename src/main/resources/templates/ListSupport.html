@@ -24,13 +24,13 @@
 
 
             <li class="nav-item active">
-                <a class="nav-link" th:href="@{/Support/OpenSupport}"> Open Support Tikect<span class="sr-only">(current)</span></a>
+                <a class="nav-link" th:href="@{/Support/OpenSupport}"> Open Support Ticket<span class="sr-only">(current)</span></a>
             </li>
 
 
 
             <li class="nav-item active">
-                <a class="nav-link" th:href="@{/Support/ListSupport}"> Support Tikect  List <span class="sr-only">(current)</span></a>
+                <a class="nav-link" th:href="@{/Support/ListSupport}"> Support Ticket  List <span class="sr-only">(current)</span></a>
             </li>
 
           
@@ -74,10 +74,10 @@
           <tr>
             
                 <th scope="col">Machine ID</th>
-                <th scope="col">title</th>
+                <th scope="col">Title</th>
                 <th scope="col">Level</th>
-                <th scope="col">breakdown</th>
-                <th scope="col">status</th>
+                <th scope="col">Breakdown</th>
+                <th scope="col">Status</th>
                 <th scope="col">Actions</th>
 
 
@@ -104,14 +104,14 @@
                   <button  th:if="${ticket.Status.name()=='InProgress' }" type="button" class="btn btn-warning  col-5" disabled>InProgress</button>
                 </td>
                 <div th:if="${ticket.Status.name()=='Open'  }">
-                  
+          
                   <form class="d-inline "  method="POST" th:action="@{/Support/TakeSupport/{id}(id=${ticket.Id})}" >  
                     <td ><button type="submit" th:if="${Auth=='Resever' || Auth=='Admin' }" class="btn btn-primary">Take Ticket</button>  
                     </form>
                     <form  class="d-inline "   method="POST" th:action="@{/Support/DropeSupport/{id}(id=${ticket.Id})}">
                       <button type="submit" th:if="${ticket.user.username==username || Auth=='Resever' ||  Auth=='Admin'}" class="btn btn-warning">Drope Ticket</button> 
                     </form>
-                    <button type="button"  th:unless="${ticket.user.username==username || Auth=='Resever' || Auth=='Admin'}" class="btn btn-primary" disabled>Tiket is open</button> 
+                    <button type="button"  th:unless="${ticket.user.username==username || Auth=='Resever' || Auth=='Admin'}" class="btn btn-primary" disabled>Ticket is open</button> 
                     
                 
 
@@ -127,7 +127,9 @@
                 <form  class="d-inline "  method="get" th:action="@{/Support/CloseSupport/{id}(id=${ticket.Id})}">
                 <td th:if="${ticket.Status.name()=='InProgress' && (ticket.Tecnesstion.Username==username ||  Auth =='Admin' )} "><button type="submit" class="btn btn-dark col-5" >Close Ticket</button>  </td>
                 </form>
-                <td th:if="${ticket.Status.name()=='Closed' }"><button type="button" class="btn btn-success col-5" >More Info</button>  </td>
+                <form  class="d-inline "  method="get" th:action="@{/Support/MoreInfo/{id}(id=${ticket.Id})}">
+                <td th:if="${ticket.Status.name()=='Closed' }"><button type="submit" class="btn btn-success col-5" >More Info</button>  </td>
+              </form>
 
               
 

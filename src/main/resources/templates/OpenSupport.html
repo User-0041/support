@@ -10,7 +10,7 @@
 <body>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">Bullgin Support</a>
+            <a class="navbar-brand" href="#">Bulgin Support</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
@@ -21,23 +21,20 @@
     
     
                 <li class="nav-item active">
-                    <a class="nav-link" th:href="@{/Support/OpenSupport}"> Open Support Tikect<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" th:href="@{/Support/OpenSupport}"> Open Support Ticket <span class="sr-only">(current)</span></a>
                 </li>
     
     
     
                 <li class="nav-item active">
-                    <a class="nav-link" th:href="@{/Support/ListSupport}"> Support Tikect  List <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" th:href="@{/Support/ListSupport}"> Support Ticket   List <span class="sr-only">(current)</span></a>
                 </li>
     
               
               
       
               </ul>
-              <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-              </form>
+       
               <form class="d-inline "  method="POST" th:action="@{/logout}" >  
                 <td ><button type="submit" th:text="${username}"  class="btn btn-primary ml-1">Take Ticket</button>  
                 </form>
@@ -53,8 +50,8 @@
             <form class="needs-validation" method="post" th:action="@{/Support/OpenSupport} "  th:object="${ticket}" >
                 <div class="form-row">
                     <div class="col-md-7 mb-3">
-                        <label for="Machine_ID">Machine_ID</label>
-                        <input type="text" class="form-control"  th:field="*{machine}"  id="machine" placeholder="XXXXXX" >
+                        <label for="Machine_ID">Machine_Id</label>
+                        <input type="text" class="form-control"  th:field="*{machine}"  id="machine" placeholder="Id" >
                         
                         <div class="alert alert-warning" role="alert" th:if="${#fields.hasErrors('machine')}" th:errors="*{machine}"> </div>
                         
@@ -65,7 +62,7 @@
                         <label for="Level">LEVEL</label>
                         <select  th:field="*{Level}"  class="custom-select">
                             <option value="Low">Low</option>
-                            <option value="Normal">Hige</option>
+                            <option value="Normal">High</option>
                             <option value="Critical">Critical</option>
                           </select>
                         
@@ -74,7 +71,7 @@
                 <div class="form-row">
                     <div class="col-md-7 mb-3">
                         <label >TITELE</label>
-                        <input type="text" class="form-control" th:field="*{Titel}" id="Titel" placeholder="Pierre" >
+                        <input type="text" class="form-control" th:field="*{Titel}" id="Titel" placeholder="Titel" >
                         <div class="alert alert-warning" role="alert" th:if="${#fields.hasErrors('Titel')}" th:errors="*{Titel}"> </div>
 
                         

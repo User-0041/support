@@ -1,8 +1,11 @@
 package com.support.Contollers;
 
 import java.security.Principal;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
         
@@ -48,13 +51,17 @@ public class SupportController {
     UserService UserService;
 
     @GetMapping("/Support/OpenSupport")
-    public String OpenSupport(Ticket ticket,Model model) {
+    public String OpenSupport(Ticket ticket,Principal principal,Model model) {
         model.addAttribute("BreakDowns",BreakDownService.FindAll() );
+        model.addAttribute("username",principal.getName() );
+
         return "OpenSupport";
     }
 
     @GetMapping("/Support/CloseSupport/{id}")
-    public String CloseSupportPage(@PathVariable("id") String id,Model model) {
+    public String CloseSupportPage(@PathVariable("id") String id,Principal principal,Model model) {
+        model.addAttribute("username",principal.getName() );
+
         model.addAttribute("Tid", id);
         return "CloseSupport";
     }
@@ -69,7 +76,7 @@ public class SupportController {
         t.get().setStatus(Status.InProgress);
         TicketService.CloseTicket(t.get());
 
-        return "index";
+        return "redirect:/Support/ListSupport";
     }
 
 
@@ -88,23 +95,26 @@ public class SupportController {
        
         
 
-        return "redirect:/";
+        return "redirect:/Support/ListSupport";
     }
 
 
-
+ 
     @PostMapping("/Support/CloseSupport")
-    public String CloseSupport(@RequestParam(name = "DESCREPTION") String DESCREPTION,@RequestParam(name = "ID") String id ,@RequestParam(name = "OBSERVATION") String OBSERVATION, Model model) {
+    public String CloseSupport(@RequestParam(name = "DESCREPTION") String DESCREPTION,@RequestParam(name = "date") Date date,@RequestParam(name = "ID") String id,@RequestParam(name = "OBSERVATION") String OBSERVATION, Model model) {
+        System.out.println(date);
+
         Optional<Ticket> t= TicketService.FindById(id);
         System.out.println(id);
         if(t.isEmpty()){ return "index";}
         
         t.get().setObservetion(OBSERVATION);
         t.get().setDescrption(DESCREPTION);
-        t.get().setCloseDate(Utils.CurrentDate());
+        t.get().setCloseDate(date);
         t.get().setStatus(Status.Closed);
         TicketService.CloseTicket(t.get());
-            return "index";
+        return "redirect:/Support/ListSupport";
+
     }
 
     @GetMapping("/Support/ListSupport")
@@ -157,8 +167,27 @@ public class SupportController {
         ticket.setIssueDate(Utils.CurrentDate());
         ticket.setUser(UserService.findByUsername(principal.getName()));       
         TicketService.CloseTicket(ticket);
-        return "index";
+        return "redirect:/Support/ListSupport";
+
     }
 
+
+    @GetMapping("/Support/MoreInfo/{id}")
+    String TicketInfo(@PathVariable("id")String id,Principal principal , Model model){
+        Optional<Ticket> t= TicketService.FindById(id);
+
+      
+        model.addAttribute("Duration",   Utils.Durration(t.get()));
+        model.addAttribute("username",principal.getName() );
+
+        model.addAttribute("Ticket", t.orElse(null));
+        return "info";  
+    }
  
+
+    @GetMapping("Debug")
+    String Debug(){
+     
+        return "Debug";  
+    }
 }

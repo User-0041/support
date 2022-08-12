@@ -101,5 +101,6 @@
 			</plugin>
 		</plugins>
 	</build>
-
+<mvc:resources mapping="/webjars/**" location="/webjars/"/>
+<mvc:annotation-driven />
 </project>
