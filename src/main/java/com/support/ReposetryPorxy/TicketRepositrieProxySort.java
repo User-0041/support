@@ -1,16 +1,15 @@
 package com.support.ReposetryPorxy;
 
 import com.support.Entitis.Ticket;
-import com.support.Enums.Status;
+
 import com.support.Repositories.TicketRepositrie;
 
-import java.util.Collection;
+
 import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+
 import org.springframework.stereotype.Service;
 
 

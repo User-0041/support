@@ -1,14 +1,13 @@
 package com.support.Services;
 
 
-import java.util.List;
+
 import java.util.Optional;
-import java.util.stream.Collectors;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
+
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +15,7 @@ import com.support.Entitis.Machine;
 import com.support.Entitis.Ticket;
 import com.support.Entitis.User;
 import com.support.Enums.Level;
-import com.support.Enums.Status;
+
 import com.support.ReposetryPorxy.TicketProxyrPage;
 import com.support.Repositories.TicketRepositrie;
 import com.support.Servicesinterfaces.TicketInterface;

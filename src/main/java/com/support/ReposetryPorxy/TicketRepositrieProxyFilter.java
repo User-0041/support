@@ -2,9 +2,6 @@ package com.support.ReposetryPorxy;
 
 import com.support.Entitis.Ticket;
 import com.support.Enums.Status;
-import com.support.Repositories.TicketRepositrie;
-
-import net.bytebuddy.TypeCache.Sort;
 
 import java.util.ArrayList;
 import java.util.List;
