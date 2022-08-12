@@ -24,15 +24,17 @@ public class TicketRepositrieProxySort {
 
     public List<Ticket> getList(String Sort,  String Key){
     List<Ticket> Unsorted = TicketRepositrie.findByMachineIdStartingWith(Key);
-    if(Sort =="Date"){  
+    if(Sort!=null){
+    if(Sort.equals("Date")){  
         Collections.sort(Unsorted,new TicketComparatorDate());
     }
-    if(Sort=="Status"){
+    if(Sort.equals("Status")  ){
         Collections.sort(Unsorted,new TicketComparatorStatus());
-    }if(Sort=="Level"){
+    }if(Sort.equals("Level")){
         Collections.sort(Unsorted,new TicketComparatorLevel());
 
     }
+}
     return Unsorted;
 
 

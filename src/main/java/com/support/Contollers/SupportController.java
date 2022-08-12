@@ -77,7 +77,7 @@ public class SupportController {
     @PostMapping("/Support/DropeSupport/{id}")
     public String DropeSupport(@PathVariable("id") String id,Principal principal, Model model) {
         Optional<Ticket> t= TicketService.FindById(id);
-        if(t.isEmpty()){System.out.println("Not found"); return "index";}
+        if(t.isEmpty()){ return "index";}
         if((t.get().getUser().getUsername()==principal.getName())){ System.out.println("Not Yours");;return "index";};
         try{
             if((t.get().getTecnesstion().getUsername()==principal.getName())){ System.out.println("Not Yours");;return "index";};
@@ -108,30 +108,33 @@ public class SupportController {
     }
 
     @GetMapping("/Support/ListSupport")
-    public String ListSupport(Model model, @RequestParam("page") Optional<Integer> page,@RequestParam("sort") Optional<String> Sort ,@RequestParam(required = false)Optional<String> keyword,Principal principal) {
+    public String ListSupport(Model model,@RequestParam("sort") Optional<String> sort,@RequestParam("filter") Optional<String> status,@RequestParam("page") Optional<Integer> page,@RequestParam("sort") Optional<String> Sort ,@RequestParam(required = false)Optional<String> keyword,Principal principal) {
+
+        System.out.println(sort.orElse(""));
+        String s =null;
+        
 
         
- 
-
-        int currentPage = page.orElse(0);
-        
-        Page<Ticket>  Tikets= TicketService.FindByFilters("Level",null,"",PageRequest.of(0,10));
-
+        Page<Ticket>  Tikets= TicketService.FindByFilters(sort.orElse(""),status.orElse(""),keyword.orElse(""),PageRequest.of(page.orElse(0),7));
+        model.addAttribute("keyword",keyword.orElse(""));
+        model.addAttribute("sort",sort.orElse(""));
+        model.addAttribute("filter",status.orElse(""));
         model.addAttribute("ticketList",Tikets );
         model.addAttribute("username",principal.getName() );
         User user= UserService.findByUsername(principal.getName());
         model.addAttribute("Auth",user.getPrivilage() );
-
-
+        
+        
         int totalPages = Tikets.getTotalPages();
         if (totalPages > 0) {
             List<Integer> pageNumbers = IntStream.rangeClosed(0, totalPages-1)
-                .boxed()
-                .collect(Collectors.toList());
+            .boxed()
+            .collect(Collectors.toList());
             model.addAttribute("pageNumbers", pageNumbers);
         }
+        
 
-
+        
         return "ListSupport";
     }
 
@@ -144,8 +147,7 @@ public class SupportController {
     String  OpenTicket( @Valid Ticket ticket,BindingResult result,Principal principal ,Errors errors, Model model){
         model.addAttribute("BreakDowns",BreakDownService.FindAll() );
 
-        System.out.println(errors);
-        System.out.println(errors.getErrorCount());
+
 
         if (null != errors && errors.getErrorCount() > 0) { return "OpenSupport";}
    

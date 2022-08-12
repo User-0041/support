@@ -82,7 +82,8 @@ public class TicketService implements TicketInterface{
         return TicketRepositrie.findByMachineIdStartingWith(key, pageable);
     }
     
-    public Page<Ticket> FindByFilters(String Sort , Status status , String Key,Pageable pageable){
+    public Page<Ticket> FindByFilters(String Sort , String status , String Key,Pageable pageable){
+        System.out.println(Sort);
     return TicketProxyrPage.getList(Sort, status, Key, pageable);
  
     }

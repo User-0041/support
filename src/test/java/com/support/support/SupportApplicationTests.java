@@ -74,6 +74,8 @@ class SupportApplicationTests {
 		UserRepositorie.save(u1);
 		UserRepositorie.save(r1);
 		UserRepositorie.save(a1);
+		UserRepositorie.save(a2);
+
 }
 
 @Test

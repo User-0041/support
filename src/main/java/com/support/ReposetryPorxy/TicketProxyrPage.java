@@ -18,7 +18,7 @@ public class TicketProxyrPage {
     @Autowired
     TicketRepositrieProxyFilter TicketRepositrieProxyFilter;
 
-    public Page<Ticket> getList(String Sort , Status status , String Key,Pageable pageable){
+    public Page<Ticket> getList(String Sort , String status , String Key,Pageable pageable){
         List<Ticket> List = TicketRepositrieProxyFilter.getList(Sort, status, Key);
          int start = (int)pageable.getOffset();
          int end = Math.min((start + pageable.getPageSize()), List.size());

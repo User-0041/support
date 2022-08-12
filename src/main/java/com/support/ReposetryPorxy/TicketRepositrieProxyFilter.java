@@ -19,18 +19,24 @@ public class TicketRepositrieProxyFilter {
 
     @Autowired 
     TicketRepositrieProxySort  TicketRepositrieProxySort ;
-    public List<Ticket> getList(String Sort , Status status , String Key){
+    public List<Ticket> getList(String Sort , String status , String Key){
     List<Ticket> Unfilterd = TicketRepositrieProxySort.getList(Sort,  Key);
     List<Ticket> filterd  =new  ArrayList<>() ;
-   
-    if(status!=null){
-       for(Ticket t  : Unfilterd){
-        if(t.getStatus().equals(status)){
-            filterd.add(t);
+   try{
+    if(Status.valueOf(status)!=null){
+        for(Ticket t  : Unfilterd){
+         if(t.getStatus().equals(Status.valueOf(status))){
+             filterd.add(t);
+         }
         }
-       }
-       return filterd;
-    };
+        return filterd;
+     };
+
+
+   }catch(Exception e){
+    System.err.println(e);
+   }
+    
     return Unfilterd;
     }
 }

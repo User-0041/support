@@ -1,0 +1,15 @@
+"filename", "language", "Java", "HTML", "comment", "blank", "total"
+"d:\Support\support\src\main\java\com\support\Contollers\SupportController.java", "Java", 1, 0, 0, 3, 4
+"d:\Support\support\src\main\java\com\support\Entitis\Ticket.java", "Java", 0, 0, 0, 1, 1
+"d:\Support\support\src\main\java\com\support\ReposetryPorxy\TicketComparatorDate.java", "Java", 9, 0, 0, 7, 16
+"d:\Support\support\src\main\java\com\support\ReposetryPorxy\TicketComparatorLevel.java", "Java", 9, 0, 0, 7, 16
+"d:\Support\support\src\main\java\com\support\ReposetryPorxy\TicketComparatorStatus.java", "Java", 9, 0, 0, 6, 15
+"d:\Support\support\src\main\java\com\support\ReposetryPorxy\TicketProxyrPage.java", "Java", 21, 0, 0, 11, 32
+"d:\Support\support\src\main\java\com\support\ReposetryPorxy\TicketRepositrieProxyFilter.java", "Java", 27, 0, 0, 10, 37
+"d:\Support\support\src\main\java\com\support\ReposetryPorxy\TicketRepositrieProxySort.java", "Java", 30, 0, 0, 15, 45
+"d:\Support\support\src\main\java\com\support\Repositories\TicketRepositrie.java", "Java", 8, 0, 0, 4, 12
+"d:\Support\support\src\main\java\com\support\Services\TicketService.java", "Java", 12, 0, 0, 2, 14
+"d:\Support\support\src\main\java\com\support\Servicesinterfaces\TicketInterface.java", "Java", 0, 0, 0, 1, 1
+"d:\Support\support\src\main\resources\templates\ListSupport.html", "HTML", 0, 2, 0, 3, 5
+"d:\Support\support\src\test\java\com\support\support\SupportApplicationTests.java", "Java", 10, 0, 0, 0, 10
+"Total", "-", 136, 2, 0, 70, 208

@@ -42,19 +42,20 @@
 
            
             <select  name="sort" th:value="${sort}"  class="form-control ml-1 mr-1">
-              <option value="">All</option>
-              <option value="Date">Date</option>
-              <option value="Level">Status</option>
-              <option value="Level">Level</option>             
+              <option value="" th:selected="${sort==''}" >All</option>
+              <option value="Date" th:selected="${sort=='Date'}" >Date</option>
+              <option value="Status" th:selected="${sort=='Status'}" >Status</option>
+              <option value="Level" th:selected="${sort=='Level'}" >Level</option>             
 
             </select>
-            <select name="filter" th:value="${filter}" class="form-control ml-1 mr-1">
-              <option >All</option>
-              <option value="Open">Open</option>
-              <option value="InProgress">InProgress</option>
-              <option value="Closed">Closed</option>
+          
+            <select    name="filter" th:value="${filter}"  class="form-control ml-1 mr-1">
+              <option value=""  th:selected="${filter==''}" >All</option>
+              <option value="Open" th:selected="${filter=='Open'}" >Open</option>
+              <option value="InProgress" th:selected="${filter=='InProgress'}">InProgress</option>
+              <option value="Closed" th:selected="${filter=='Closed'}">Closed</option>
             </select>
-            <input class="form-control mr-sm-2"   name="keyword" th:value="${keyword}"  type="search" placeholder="Search" aria-label="Search">
+            <input class="form-control mr-sm-2"   name="keyword" th:value="${keyword}"   type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
           </form>
           <form class="d-inline "  method="POST" th:action="@{/logout}" >  
@@ -83,16 +84,17 @@
 
               </tr>
             </thead>
+            <h1  > </h1>
+         
             <tbody>
-              <tr th:each="ticket: ${ticketList}" >
-               
+              <tr   th:if="${ticketList.getNumberOfElements()!=0}" th:each="ticket: ${ticketList}" >
                 <td th:text="${ticket.machine.Id}">M1</td>
                 <td th:text="${ticket.Titel}"></td>
                 <td>
                   <button  th:if="${ticket.Level.name()=='Low' }" type="button" class="btn btn-secondary  col-5" disabled>Low</button>
                   <button  th:if="${ticket.Level.name()=='Normal' }" type="button" class="btn btn-warning  col-5" disabled>Normal</button>
                   <button  th:if="${ticket.Level.name()=='Critical' }" type="button" class="btn btn-danger  col-5" disabled>Critical</button>
-
+                  
                   
                 </td>
                 <td th:text="${ticket.breakdown.type}" >Electrical</td>
@@ -102,15 +104,16 @@
                   <button  th:if="${ticket.Status.name()=='InProgress' }" type="button" class="btn btn-warning  col-5" disabled>InProgress</button>
                 </td>
                 <div th:if="${ticket.Status.name()=='Open'  }">
-
+                  
                   <form class="d-inline "  method="POST" th:action="@{/Support/TakeSupport/{id}(id=${ticket.Id})}" >  
                     <td ><button type="submit" th:if="${Auth=='Resever' || Auth=='Admin' }" class="btn btn-primary">Take Ticket</button>  
                     </form>
                     <form  class="d-inline "   method="POST" th:action="@{/Support/DropeSupport/{id}(id=${ticket.Id})}">
-                    <button type="submit" th:if="${ticket.user.username==username || Auth=='Resever' ||  Auth=='Admin'}" class="btn btn-warning">Drope Ticket</button> 
+                      <button type="submit" th:if="${ticket.user.username==username || Auth=='Resever' ||  Auth=='Admin'}" class="btn btn-warning">Drope Ticket</button> 
                     </form>
                     <button type="button"  th:unless="${ticket.user.username==username || Auth=='Resever' || Auth=='Admin'}" class="btn btn-primary" disabled>Tiket is open</button> 
-
+                    
+                
 
 
                 </div>
@@ -133,8 +136,9 @@
               </tr>
             </tbody>
           </table>
+          <h1 th:if="${ticketList.getNumberOfElements()==0}" class="text-center">This table is empty :[ </h1>
           <nav aria-label="Page navigation example" th:if="${ticketList.totalPages > 0}" >
-        
+            
             <ul class="pagination">
               <li class="page-item">
                 <a class="page-link" href="#" aria-label="Previous">
