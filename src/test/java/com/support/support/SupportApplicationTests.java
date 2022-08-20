@@ -63,10 +63,10 @@ class SupportApplicationTests {
 
 	@Test
 	void Repositories(){
-		User u1 = new User("User","$2a$12$s.nKYeuQIb/Jh3WHSsA.7OYDASy0HUAvJxKNU4go08hQ3NsqoUj2K");
-		User r1 = new Admin("Admin","$2a$12$jdaOZlcKmpF1nbI.u0Sb1eHrhsdhQJ3wAa2.vYCAd.9PNuq7ZE7wy");
-		User a1 = new Resever("Resever","$2a$12$YZfY8uQBsUsA2GcPbzrZCe4xK/3oTBgxYkir0TK/6E1xfxVOSv1eG");
-		User a2 = new Resever("Resever-2","$2a$12$YZfY8uQBsUsA2GcPbzrZCe4xK/3oTBgxYkir0TK/6E1xfxVOSv1eG");
+		User u1 = new User("User","$2a$12$s.nKYeuQIb/Jh3WHSsA.7OYDASy0HUAvJxKNU4go08hQ3NsqoUj2K",98215155,"qhmed0826@gmail.com",true);
+		User r1 = new Admin("Admin","$2a$12$jdaOZlcKmpF1nbI.u0Sb1eHrhsdhQJ3wAa2.vYCAd.9PNuq7ZE7wy",98215155,"qhmed0826@gmail.com",true);
+		User a1 = new Resever("Resever","$2a$12$YZfY8uQBsUsA2GcPbzrZCe4xK/3oTBgxYkir0TK/6E1xfxVOSv1eG",98215155,"qhmed0826@gmail.com",true);
+		User a2 = new Resever("Resever-2","$2a$12$YZfY8uQBsUsA2GcPbzrZCe4xK/3oTBgxYkir0TK/6E1xfxVOSv1eG",98215155,"qhmed0826@gmail.com",true);
 
 		UserRepositorie.save(u1);
 		UserRepositorie.save(r1);
@@ -77,6 +77,8 @@ class SupportApplicationTests {
 
 @Test
 void Page(){
+	User u1 = new User("User","$2a$12$s.nKYeuQIb/Jh3WHSsA.7OYDASy0HUAvJxKNU4go08hQ3NsqoUj2K",98215155,"qhmed0826@gmail.com",true);
+	Resever r = (Resever) u1;
 
 }
 }

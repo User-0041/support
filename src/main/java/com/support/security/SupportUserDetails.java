@@ -40,7 +40,8 @@ public class SupportUserDetails  implements UserDetails {
     @Override
     public boolean isAccountNonExpired() {
 
-        return true;
+        return User.getIsActive();
+        
     }
 
     @Override

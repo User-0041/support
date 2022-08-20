@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/Users.css"> 
+    <title>Document</title>
+</head>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Bullgin Support</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+
+
+
+            <li class="nav-item active">
+                <a class="nav-link" th:href="@{/Support/OpenSupport}"> Open Support Ticket<span class="sr-only">(current)</span></a>
+            </li>
+
+
+
+            <li class="nav-item active">
+                <a class="nav-link" th:href="@{/Support/ListSupport}"> Support Ticket  List <span class="sr-only">(current)</span></a>
+            </li>
+
+          
+            <li th:if="${Auth=='Admin'}" class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Admin Space
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" th:href="@{/Admin/Users}">Users</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </li>
+          </ul>
+          
+          <form  method="GET" th:action="@{/Support/ListSupport/}" class="form-inline my-2 my-lg-0">
+
+           
+            <select  name="sort" th:value="${sort}"  class="form-control ml-1 mr-1">
+              <option value="" th:selected="${sort==''}" >All</option>
+              <option value="Date" th:selected="${sort=='Date'}" >Date</option>
+              <option value="Status" th:selected="${sort=='Status'}" >Status</option>
+              <option value="Level" th:selected="${sort=='Level'}" >Level</option>             
+
+            </select>
+          
+            <select    name="filter" th:value="${filter}"  class="form-control ml-1 mr-1">
+              <option value=""  th:selected="${filter==''}" >All</option>
+              <option value="Open" th:selected="${filter=='Open'}" >Open</option>
+              <option value="InProgress" th:selected="${filter=='InProgress'}">InProgress</option>
+              <option value="Closed" th:selected="${filter=='Closed'}">Closed</option>
+            </select>
+            <input class="form-control mr-sm-2"   name="keyword" th:value="${keyword}"   type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+          <form class="d-inline "  method="POST" th:action="@{/logout}" >  
+            <td ><button type="submit" th:text="${username}"  class="btn btn-primary ml-1">Take Ticket</button>  
+            </form>
+
+          <b></b>
+        </div>
+      </nav>
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title text-uppercase mb-0">Manage Users</h5>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table no-wrap user-table mb-0">
+                          <thead>
+                            <tr>
+                              <th scope="col" class="border-0 text-uppercase font-medium pl-4">#</th>
+                              <th scope="col" class="border-0 text-uppercase font-medium">UserName</th>
+                              <th scope="col" class="border-0 text-uppercase font-medium">Phone Number</th>
+                              <th scope="col" class="border-0 text-uppercase font-medium">Ticket</th>
+                              <th scope="col" class="border-0 text-uppercase font-medium">Categori</th>
+                              <th scope="col" class="border-0 text-uppercase font-medium">Categori</th>
+
+
+
+
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr   th:each="User : ${Users}" >
+                              <td class="pl-4">1</td>
+                              <td>
+                                  <h5 class="font-medium mb-0" th:text="${User.username}" ></h5>
+                            
+                              </td>
+                   
+                              <td>
+                                  <span class="text-muted" th:text="${User.email}"  >daniel@website.com</span><br>
+                                  <span class="text-muted" th:text="${User.telephoneNumber}">999 - 444 - 555</span>
+                              </td>
+                              <td>
+                                  <span class="text-muted"th:text="${'Issued :'+ User.getIssued()}"></span><br>
+                                  <span class="text-muted">Resloved:10</span>
+                              </td>
+                              <td>
+                                <span class="text-muted" th:text="${User.getPrivilage()}">Admin</span><br>
+                              </td>
+                              <td>
+                                <div class="form-inline">
+
+
+
+                                  <form class="form-inline" th:action="@{/Admin/DropeUser/{id}(id=${User.username})}" method="post">
+                                    
+                                    <button th:if="${!User.IsActive}" type="submit" th:disabled="${User.getPrivilage()=='Admin'}" class="btn btn-outline-info btn-circle btn-lg btn-circle"><i  class="fa fa-key" ></i> </button>
+                                    <button th:if="${User.IsActive}" type="submit" th:disabled="${User.getPrivilage()=='Admin'}" class="btn btn-outline-info btn-circle btn-lg btn-circle"><i  class="fa fa-lock" ></i> </button>
+                                    
+                                  </form>
+                                  
+                                  
+                                  <button type="button"  class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"><i class="fa fa-info"></i> </button>
+                                  
+                                </div>
+                                </td>
+                            </tr>
+                         
+                          </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+</body>
+</html>

@@ -1,5 +1,7 @@
 package com.support.Services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,19 +14,23 @@ public class UserService implements UserInterface {
     UserRepositorie UserRepositorie;
 
     @Override
-    public void CreateResever(User r) {
-
+    public void CreateUser(User r) {
+        UserRepositorie.save(r);
         
     }
 
     @Override
-    public void RevokeResever(User r) {
+    public void RevokeResever(String username) {
 
-        
+        User u = UserRepositorie.findByUsername(username);
+        u.setIsActive(!u.getIsActive());
+        UserRepositorie.save(u);
     }
 
     @Override
-    public void findAll() {
+    public List<User> findAll() {
+
+        return UserRepositorie.findAll();
 
         
     }

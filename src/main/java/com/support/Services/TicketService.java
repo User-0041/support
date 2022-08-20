@@ -86,6 +86,16 @@ public class TicketService implements TicketInterface{
     return TicketProxyrPage.getList(Sort, status, Key, pageable);
  
     }
+
+    @Override
+    public Integer countByTecnesstionUsername(String Username) {
+       return TicketRepositrie.countByTecnesstionUsername(Username);
+    }
+
+    @Override
+    public Integer countByUserUsername(String Username) {
+        return TicketRepositrie.countByUserUsername(Username);
+    }
  
 
 }

@@ -22,6 +22,7 @@ import com.support.Enums.Level;
 
 @Repository 
 public interface TicketRepositrie extends JpaRepository<Ticket , String>, JpaSpecificationExecutor<Ticket> {
+
     Page<Ticket> findAll(Pageable pageable);
     Page<Ticket> findByMachine(Machine m,Pageable pageable);
     Page<Ticket> findByUser(User u,Pageable pageable);
@@ -29,6 +30,9 @@ public interface TicketRepositrie extends JpaRepository<Ticket , String>, JpaSpe
     Optional <Ticket> findById(String id);
     Page<Ticket> findByMachineIdStartingWith(String key,Pageable pageable);
     List<Ticket> findByMachineIdStartingWith(String key);
+    Integer countByTecnesstionUsername(String Username);
+    Integer countByUserUsername(String Username);
+
    
 
 }
