@@ -18,6 +18,7 @@ public class MachineService implements MachineInterface {
        MachineRepositorie.save(m);
     }
 
+    
     @Override
     public void DropeMachine(Machine m) {
         MachineRepositorie.delete(m);
@@ -26,4 +27,6 @@ public class MachineService implements MachineInterface {
     public Optional<Machine>  FindMachine(Machine m){
        return  MachineRepositorie.findById(m.getId());
     }
+
+   
 }

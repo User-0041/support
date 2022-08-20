@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,12 +20,17 @@ import lombok.Setter;
 @Setter
 public class Machine {
     @Id
+    @NotBlank
     String id;
     @ManyToOne
+
     MachineFamily family;
     @OneToMany
     List<Ticket> tickets;
 
+
+
+    
     public Machine(String Id){
         this.id = Id;
     }

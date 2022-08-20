@@ -82,7 +82,7 @@ public class TicketService implements TicketInterface{
     }
     
     public Page<Ticket> FindByFilters(String Sort , String status , String Key,Pageable pageable){
-        System.out.println(Sort);
+    
     return TicketProxyrPage.getList(Sort, status, Key, pageable);
  
     }

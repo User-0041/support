@@ -57,7 +57,7 @@ class SupportApplicationTests {
 	@Test
 	void FindByTest() {
 		List<Ticket> t =  TicketRepositrieProxySort.getList("Status","M7");
-		System.out.println(t);
+	
 	}
 
 

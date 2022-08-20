@@ -16,7 +16,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.Builder.Default;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -27,21 +26,14 @@ public class User {
     @Id
     @NotBlank
     String username;
-    
     String password;
    //TODO::FIX THIS
     Integer telephoneNumber;
     @NotBlank
     String email;
-
-    Boolean IsActive=true;
-  
+    Boolean IsActive=true;  
     static String privilage = "User";
     public  String getPrivilage() {
         return privilage;
     }
-
-
-
-
 }

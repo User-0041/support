@@ -84,9 +84,9 @@ public class SupportController {
     public String DropeSupport(@PathVariable("id") String id,Principal principal, Model model) {
         Optional<Ticket> t= TicketService.FindById(id);
         if(t.isEmpty()){ return "index";}
-        if((t.get().getUser().getUsername()==principal.getName())){ System.out.println("Not Yours");;return "index";};
+        if((t.get().getUser().getUsername()==principal.getName())){ return "index";};
         try{
-            if((t.get().getTecnesstion().getUsername()==principal.getName())){ System.out.println("Not Yours");;return "index";};
+            if((t.get().getTecnesstion().getUsername()==principal.getName())){return "index";};
         }catch(Exception e) {
             TicketService.DropTicket(t.get());
         }
@@ -101,10 +101,10 @@ public class SupportController {
  
     @PostMapping("/Support/CloseSupport")
     public String CloseSupport(@RequestParam(name = "DESCREPTION") String DESCREPTION,@RequestParam(name = "date") Date date,@RequestParam(name = "ID") String id,@RequestParam(name = "OBSERVATION") String OBSERVATION, Model model) {
-        System.out.println(date);
+       
 
         Optional<Ticket> t= TicketService.FindById(id);
-        System.out.println(id);
+    
         if(t.isEmpty()){ return "index";}
         
         t.get().setObservetion(OBSERVATION);
@@ -118,8 +118,6 @@ public class SupportController {
 
     @GetMapping("/Support/ListSupport")
     public String ListSupport(Model model,@RequestParam("sort") Optional<String> sort,@RequestParam("filter") Optional<String> status,@RequestParam("page") Optional<Integer> page,@RequestParam("sort") Optional<String> Sort ,@RequestParam(required = false)Optional<String> keyword,Principal principal) {
-
-        System.out.println(sort.orElse(""));
 
         
         Page<Ticket>  Tikets= TicketService.FindByFilters(sort.orElse(""),status.orElse(""),keyword.orElse(""),PageRequest.of(page.orElse(0),7));

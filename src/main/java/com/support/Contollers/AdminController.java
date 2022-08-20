@@ -19,20 +19,29 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.support.security.SecurityConfiguration;
-
+import com.support.Entitis.Machine;
+import com.support.Entitis.MachineFamily;
 import com.support.Entitis.Resever;
 import com.support.Entitis.User;
+import com.support.Services.MachineFamilyService;
+import com.support.Services.MachineService;
 import com.support.Services.UserService;
 import com.support.Services.UserWraper;
 import com.support.Utils.Utils;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @Controller
 public class AdminController {
 
-    
+@Autowired
+MachineService MachineService;    
+
 @Autowired
 UserService UserService;
 
+@Autowired
+MachineFamilyService MachineFamilyService;
 
 @Autowired
 private PasswordEncoder PasswordEncoder;
@@ -53,27 +62,76 @@ public String DropeUser(@PathVariable("id") String id) {
    return "Debug";
 }
 
-@GetMapping(value="/Admin/AddUser")
-public String AddUsers(User user) {
-    return "AddUser";
-}
 
 
 @PostMapping(value="/Admin/SaveUsers")
 public String SaveUser(@Valid User user,BindingResult result,Errors errors, @RequestParam(value = "Role") String role) {
     if (null != errors && errors.getErrorCount() > 0) { return "AddUser";}
 
-    System.out.println(user.getTelephoneNumber());
+
     user.setPassword( PasswordEncoder.encode(user.getTelephoneNumber().toString()) );
-    System.out.println(role);
+
     if(role.equals("Resever")){
        UserService.CreateUser(new Resever(user));
-        System.out.println("Resever");
+      
     }else{
         UserService.CreateUser(user);
-      System.out.println("User");
-
     }
+    return "Debug";
+}
+
+
+
+@GetMapping(value="/Admin/Machines")
+public String Machines(){
+    return "MachinesList";
+}
+
+
+@GetMapping(value="/Admin/AddMachine")
+public String Machines(Machine machine,Model model){
+    System.out.println(MachineFamilyService.findAll());
+    model.addAttribute("MachineFamillys", MachineFamilyService.findAll());
+    return "AddMachine";
+}
+
+
+@PostMapping(value="/Admin/AddMachine")
+public String AddMachine(@Valid Machine machine,BindingResult result,Errors errors,Model model) {
+
+    Boolean Unique=false;
+    model.addAttribute("MachineFamillys", MachineFamilyService.findAll());
+
+    if(MachineService.FindMachine(machine).isPresent()){
+        Unique=true;
+        model.addAttribute("Unique", Unique);
+        return "AddMachine";
+    }
+
+    if (null != errors && errors.getErrorCount() > 0 ) {   return "AddMachine";}
+    MachineService.CreateMachine(machine);
+    return "Debug"; 
+}
+
+
+
+
+@GetMapping(value="/Admin/AddMachineFamilly")
+public String AddMachineFamilly(MachineFamily family) {
+    return "AddMachineFamilly" ;
+}
+
+
+@PostMapping(value="/Admin/AddMachineFamilly")
+public String postMethodName(@Valid MachineFamily family,BindingResult result,Errors errors,Model model) {
+    Boolean Unique = false;
+    if(MachineFamilyService.findByid(family.getId()).isPresent()){
+        Unique=true;
+        model.addAttribute("Unique", Unique);
+        return "AddMachineFamilly";
+    }
+    if (null != errors && errors.getErrorCount() > 0 ) {   model.addAttribute("Unique", Unique);return "AddMachineFamilly";}
+      MachineFamilyService.CreateMachineFamily(family); 
     return "Debug";
 }
 
