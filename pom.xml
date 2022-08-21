@@ -40,19 +40,13 @@
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
-		<dependencies>
+	
     <dependency>
         <groupId>org.webjars</groupId>
         <artifactId>webjars-locator-core</artifactId>
         <version>0.48</version>
     </dependency>
-	<!-- https://mvnrepository.com/artifact/org.webjars/jquery -->
-<dependency>
-    <groupId>org.webjars</groupId>
-    <artifactId>jquery</artifactId>
-    <version>3.6.0</version>
-</dependency>
-</dependencies>
+
 		<dependency>
     <groupId>org.webjars</groupId>
     <artifactId>bootstrap</artifactId>
@@ -73,16 +67,7 @@
     <artifactId>bootstrap</artifactId>
     <version>4.0.0-2</version>
 </dependency>
-<dependency>
-	<groupId>org.apache.poi</groupId>
-	<artifactId>poi</artifactId>
-	<version>5.1.0</version>
-</dependency>
-<dependency>
-	<groupId>org.apache.poi</groupId>
-	<artifactId>poi-ooxml</artifactId>
-	<version>5.1.0</version>
-</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -93,6 +78,20 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
+
+
+  <dependency>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi</artifactId>
+      <version>5.1.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi-ooxml</artifactId>
+      <version>5.1.0</version>
+    </dependency>
+
+
 	</dependencies>
 
 	<build>
@@ -111,6 +110,5 @@
 			</plugin>
 		</plugins>
 	</build>
-<mvc:resources mapping="/webjars/**" location="/webjars/"/>
-<mvc:annotation-driven />
+
 </project>

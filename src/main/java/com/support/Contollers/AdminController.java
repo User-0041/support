@@ -148,8 +148,7 @@ public String postMethodName(@Valid MachineFamily family,BindingResult result,Er
 }
 
 
-
-@GetMapping("/Admin/XL")
+@GetMapping("/XL")
 public void exportIntoExcelFile(HttpServletResponse response) throws IOException {
     response.setContentType("application/octet-stream");
     DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
@@ -165,6 +164,8 @@ public void exportIntoExcelFile(HttpServletResponse response) throws IOException
 
     generator.generateExcelFile(response);
 }
+
+
 }
 
 

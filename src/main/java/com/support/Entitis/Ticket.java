@@ -31,8 +31,8 @@ import lombok.ToString;
 @Setter
 public class Ticket  {
 @Id
-@GeneratedValue(generator = "uuid")
-@GenericGenerator(name = "uuid", strategy = "uuid2")
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
 String id;
 @ManyToOne
 User user;

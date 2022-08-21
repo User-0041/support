@@ -1,0 +1,11 @@
+"filename", "language", "XML", "HTML", "Java", "comment", "blank", "total"
+"d:\Support\support\pom.xml", "XML", -9, 0, 0, -1, 7, -3
+"d:\Support\support\src\main\java\com\support\Contollers\AdminController.java", "Java", 0, 0, 32, 0, 7, 39
+"d:\Support\support\src\main\java\com\support\Entitis\Machine.java", "Java", 0, 0, 4, 0, 0, 4
+"d:\Support\support\src\main\java\com\support\Services\MachineService.java", "Java", 0, 0, 4, 0, 2, 6
+"d:\Support\support\src\main\java\com\support\Services\TicketService.java", "Java", 0, 0, 4, 0, 3, 7
+"d:\Support\support\src\main\java\com\support\Servicesinterfaces\MachineInterface.java", "Java", 0, 0, 4, 0, 0, 4
+"d:\Support\support\src\main\java\com\support\Utils\ExcelGenerator.java", "Java", 0, 0, 0, 0, 1, 1
+"d:\Support\support\src\main\resources\templates\AddMachine.html", "HTML", 0, 9, 0, -2, 5, 12
+"d:\Support\support\src\main\resources\templates\MachinesList.html", "HTML", 0, -4, 0, 0, 1, -3
+"Total", "-", -9, 5, 48, -3, 26, 67
