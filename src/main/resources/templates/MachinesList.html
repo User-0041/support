@@ -20,7 +20,7 @@
                               <thead>
                                 <tr>
                                   <th scope="col" class="border-0 text-uppercase font-medium pl-4">#</th>
-                                  <th scope="col" class="border-0 text-uppercase font-medium">Name</th>
+                            
                                   <th scope="col" class="border-0 text-uppercase font-medium">Occupation</th>
                                   <th scope="col" class="border-0 text-uppercase font-medium">Email</th>
                                   <th scope="col" class="border-0 text-uppercase font-medium">Added</th>
@@ -28,22 +28,19 @@
                                 </tr>
                               </thead>
                               <tbody>
-                                <tr>
-                                  <td class="pl-4">1</td>
+                                <tr th:each=" Machine: ${Machines}">
+                                  <td class="pl-4" th:text="${Machine.id}">1</td>
+                              
                                   <td>
-                                      <h5 class="font-medium mb-0">Daniel Kristeen</h5>
-                                      
-                                  </td>
-                                  <td>
-                                      <span class="text-muted">Visual Designer</span><br>
+                                      <span class="text-muted" th:text="${Machine.family.id}"></span><br>
                                      
                                   </td>
                                   <td>
-                                      <span class="text-muted">daniel@website.com</span><br>
+                                      <span class="text-muted" th:text="${Machine.family.name}"></span><br>
                                      
                                   </td>
                                   <td>
-                                      <span class="text-muted">15 Mar 1988</span><br>
+                                      <span class="text-muted"  th:text="${#dates.format(Machine.start, 'dd-MM-yyyy')}"></span><br>
                                    
                                   </td>
                        

@@ -2,6 +2,7 @@ package com.support.Services;
 
 
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -34,6 +35,12 @@ public class TicketService implements TicketInterface{
     public void CreateTicket(Ticket t) {
        TicketRepositrie.save(t);
         
+    }
+
+
+
+    public List<Ticket> FindAllList(){
+        return TicketRepositrie.findAll();
     }
 
     @Override

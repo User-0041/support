@@ -1,6 +1,7 @@
 package com.support.Services;
 
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,10 @@ public class MachineService implements MachineInterface {
     @Override
     public void DropeMachine(Machine m) {
         MachineRepositorie.delete(m);
+    }
+
+    public List<Machine> FindAll(){
+     return   MachineRepositorie.findAll();
     }
      
     public Optional<Machine>  FindMachine(Machine m){

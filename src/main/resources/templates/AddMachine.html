@@ -43,6 +43,17 @@
                     </div>
 
 
+                    <div class="form-row">
+                        <div class="col-md-7 mb-3">
+                            <label for="Machine_ID">Machine Fmailly Id</label>
+                            <input type="date" class="form-control"  th:field="*{start}"  id="Machine  ID" placeholder="Id" >
+                            <div class="alert alert-warning" role="alert" th:if="${#fields.hasErrors('start')}" th:errors="*{start}"> </div>
+                            
+                        </div>
+                    </div>
+                    
+
+                    
 
 
                     <button class="btn btn-primary" type="submit">Envoyer</button>
