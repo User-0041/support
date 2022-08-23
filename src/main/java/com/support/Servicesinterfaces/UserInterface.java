@@ -9,4 +9,7 @@ public interface UserInterface  {
     void RevokeResever(String r);
     List<User> findAll();
     User findByUsername(String Username );
+    Integer CountIssued( String name);
+    Integer CountReseloved( String name);
+
 }

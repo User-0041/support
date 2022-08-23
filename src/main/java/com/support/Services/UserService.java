@@ -39,5 +39,16 @@ public class UserService implements UserInterface {
     public User findByUsername(String Username) {
         return UserRepositorie.findByUsername(Username);
     }
+
+    @Override
+    public Integer CountIssued(String name) {
+      return  UserRepositorie.CountIssued(name);
+    }
+
+    @Override
+    public Integer CountReseloved(String name) {
+       return  UserRepositorie.CountIssued(name);
+       
+    }
      
 }

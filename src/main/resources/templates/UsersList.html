@@ -40,32 +40,17 @@
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 <a class="dropdown-item" th:href="@{/Admin/Users}">Users</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
+                <a class="dropdown-item" th:href="@{/Admin/Machines}">Machines</a>
+                <a class="dropdown-item" th:href="@{/Admin/XL}">Downlode Excel  SpredSheat </a>
+
+
+            
+            
               </div>
             </li>
           </ul>
-          
-          <form  method="GET" th:action="@{/Support/ListSupport/}" class="form-inline my-2 my-lg-0">
+          <td ><a th:href="@{/Admin/AddUser}"  class="btn btn-primary ml-1">Add User</a>  
 
-           
-            <select  name="sort" th:value="${sort}"  class="form-control ml-1 mr-1">
-              <option value="" th:selected="${sort==''}" >All</option>
-              <option value="Date" th:selected="${sort=='Date'}" >Date</option>
-              <option value="Status" th:selected="${sort=='Status'}" >Status</option>
-              <option value="Level" th:selected="${sort=='Level'}" >Level</option>             
-
-            </select>
-          
-            <select    name="filter" th:value="${filter}"  class="form-control ml-1 mr-1">
-              <option value=""  th:selected="${filter==''}" >All</option>
-              <option value="Open" th:selected="${filter=='Open'}" >Open</option>
-              <option value="InProgress" th:selected="${filter=='InProgress'}">InProgress</option>
-              <option value="Closed" th:selected="${filter=='Closed'}">Closed</option>
-            </select>
-            <input class="form-control mr-sm-2"   name="keyword" th:value="${keyword}"   type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-          </form>
           <form class="d-inline "  method="POST" th:action="@{/logout}" >  
             <td ><button type="submit" th:text="${username}"  class="btn btn-primary ml-1">Take Ticket</button>  
             </form>
@@ -111,8 +96,9 @@
                                   <span class="text-muted" th:text="${User.telephoneNumber}">999 - 444 - 555</span>
                               </td>
                               <td>
-                                  <span class="text-muted"th:text="${'Issued :'+ User.getIssued()}"></span><br>
-                                  <span class="text-muted">Resloved:10</span>
+                                <span class="text-muted"th:text="${'Issued :'+ @userService.CountIssued(User.username)}" ></span><br>
+                                <h1  ></h1>
+                                <span th:if="${User.getPrivilage()!='User'}"  class="text-muted"th:text="${'Resloved :' +@userService.CountReseloved(User.username)}"></span>
                               </td>
                               <td>
                                 <span class="text-muted" th:text="${User.getPrivilage()}">Admin</span><br>
@@ -130,7 +116,6 @@
                                   </form>
                                   
                                   
-                                  <button type="button"  class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"><i class="fa fa-info"></i> </button>
                                   
                                 </div>
                                 </td>

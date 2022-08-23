@@ -60,6 +60,13 @@ class SupportApplicationTests {
 	
 	}
 
+	
+
+	@Test
+	void Count(){
+		System.out.println(UserRepositorie.CountReseloved("Admin"));
+	}
+
 
 	@Test
 	void Repositories(){

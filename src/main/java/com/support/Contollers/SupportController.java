@@ -26,6 +26,7 @@ import com.support.Entitis.Resever;
 import com.support.Entitis.Ticket;
 import com.support.Entitis.User;
 import com.support.Enums.Status;
+import com.support.Repositories.UserRepositorie;
 import com.support.Services.BreakDownService;
 import com.support.Services.MachineService;
 import com.support.Services.TicketService;
@@ -52,6 +53,9 @@ public class SupportController {
     public String OpenSupport(Ticket ticket,Principal principal,Model model) {
         model.addAttribute("BreakDowns",BreakDownService.FindAll() );
         model.addAttribute("username",principal.getName() );
+        User u = UserService.findByUsername(principal.getName() );
+    model.addAttribute("Auth",u.getPrivilage() );
+
 
         return "OpenSupport";
     }
@@ -170,11 +174,8 @@ public class SupportController {
     @GetMapping("/Support/MoreInfo/{id}")
     String TicketInfo(@PathVariable("id")String id,Principal principal , Model model){
         Optional<Ticket> t= TicketService.FindById(id);
-
-      
         model.addAttribute("Duration",   Utils.Durration(t.get()));
         model.addAttribute("username",principal.getName() );
-
         model.addAttribute("Ticket", t.orElse(null));
         return "info";  
     }

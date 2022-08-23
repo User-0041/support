@@ -59,11 +59,15 @@ private PasswordEncoder PasswordEncoder;
 private TicketService TicketService;
 
 @GetMapping(value="/Admin/Users")
-public String Users(Model model/* ,Principal principal*/) {
-    //model.addAttribute("username",principal.getName() );
+public String Users(Model model ,Principal principal) {
+    model.addAttribute("username",principal.getName() );
+    User user= UserService.findByUsername(principal.getName());
+    model.addAttribute("Auth",user.getPrivilage() );
+    
+
     List<User> u= UserService.findAll();
-    List<UserWraper> uw = Utils.WrapUserList(u);
-    model.addAttribute("Users",uw);
+
+    model.addAttribute("Users",u);
     return "UsersList";
 }
 
@@ -73,6 +77,16 @@ public String DropeUser(@PathVariable("id") String id) {
    return "Debug";
 }
 
+
+
+@GetMapping(value = "/Admin/AddUser")
+public String AddUser(User user,Principal principal , Model model){
+    model.addAttribute("username",principal.getName() );
+    User u= UserService.findByUsername(principal.getName());
+    model.addAttribute("Auth",u.getPrivilage() );
+    
+    return "AddUser";
+}
 
 
 @PostMapping(value="/Admin/SaveUsers")
@@ -88,21 +102,28 @@ public String SaveUser(@Valid User user,BindingResult result,Errors errors, @Req
     }else{
         UserService.CreateUser(user);
     }
-    return "Debug";
+    return "redirect:/Admin/Users";
+
 }
 
 
 
 @GetMapping(value="/Admin/Machines")
-public String Machines(Model model){
+public String Machines(Model model,Principal principal){
+    model.addAttribute("username",principal.getName() );
+    User u= UserService.findByUsername(principal.getName());
+    model.addAttribute("Auth",u.getPrivilage() );
     model.addAttribute("Machines",MachineService.FindAll());
+    
     return "MachinesList";
 }
 
 
 @GetMapping(value="/Admin/AddMachine")
-public String Machines(Machine machine,Model model){
-  
+public String Machines(Machine machine,Model model,Principal principal){
+    model.addAttribute("username",principal.getName() );
+    User u= UserService.findByUsername(principal.getName());
+    model.addAttribute("Auth",u.getPrivilage() );
     model.addAttribute("MachineFamillys", MachineFamilyService.findAll());
     return "AddMachine";
 }
@@ -122,14 +143,18 @@ public String AddMachine(@Valid Machine machine,BindingResult result,Errors erro
 
     if (null != errors && errors.getErrorCount() > 0 ) {   return "AddMachine";}
     MachineService.CreateMachine(machine);
-    return "Debug"; 
+    return "redirect:/Admin/Machines";
+    
 }
 
 
 
 
 @GetMapping(value="/Admin/AddMachineFamilly")
-public String AddMachineFamilly(MachineFamily family) {
+public String AddMachineFamilly(MachineFamily family,Principal principal ,Model model) {
+    model.addAttribute("username",principal.getName() );
+    User u= UserService.findByUsername(principal.getName());
+    model.addAttribute("Auth",u.getPrivilage() );
     return "AddMachineFamilly" ;
 }
 
@@ -144,11 +169,12 @@ public String postMethodName(@Valid MachineFamily family,BindingResult result,Er
     }
     if (null != errors && errors.getErrorCount() > 0 ) {   model.addAttribute("Unique", Unique);return "AddMachineFamilly";}
       MachineFamilyService.CreateMachineFamily(family); 
-    return "Debug";
+      return "redirect:/Admin/Machines";
+
 }
 
 
-@GetMapping("/XL")
+@GetMapping("/Admin/XL")
 public void exportIntoExcelFile(HttpServletResponse response) throws IOException {
     response.setContentType("application/octet-stream");
     DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");

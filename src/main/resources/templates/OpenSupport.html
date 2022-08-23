@@ -10,7 +10,7 @@
 <body>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">Bulgin Support</a>
+            <a class="navbar-brand" href="#">Bullgin Support</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
@@ -21,20 +21,32 @@
     
     
                 <li class="nav-item active">
-                    <a class="nav-link" th:href="@{/Support/OpenSupport}"> Open Support Ticket <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" th:href="@{/Support/OpenSupport}"> Open Support Ticket<span class="sr-only">(current)</span></a>
                 </li>
     
     
     
                 <li class="nav-item active">
-                    <a class="nav-link" th:href="@{/Support/ListSupport}"> Support Ticket   List <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" th:href="@{/Support/ListSupport}"> Support Ticket  List <span class="sr-only">(current)</span></a>
                 </li>
     
               
-              
-      
+                <li th:if="${Auth=='Admin'}" class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Admin Space
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" th:href="@{/Admin/Users}">Users</a>
+                    <a class="dropdown-item" th:href="@{/Admin/Machines}">Machines</a>
+                    <a class="dropdown-item" th:href="@{/Admin/XL}">Downlode Excel  SpredSheat </a>
+
+
+            
+                  </div>
+                </li>
               </ul>
-       
+            
+    
               <form class="d-inline "  method="POST" th:action="@{/logout}" >  
                 <td ><button type="submit" th:text="${username}"  class="btn btn-primary ml-1">Take Ticket</button>  
                 </form>
@@ -42,7 +54,6 @@
               <b></b>
             </div>
           </nav>
-
 
 
         <div class="container">

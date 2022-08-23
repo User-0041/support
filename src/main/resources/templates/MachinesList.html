@@ -8,6 +8,54 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
     <body>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Bullgin Support</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+
+
+
+            <li class="nav-item active">
+                <a class="nav-link" th:href="@{/Support/OpenSupport}"> Open Support Ticket<span class="sr-only">(current)</span></a>
+            </li>
+
+
+
+            <li class="nav-item active">
+                <a class="nav-link" th:href="@{/Support/ListSupport}"> Support Ticket  List <span class="sr-only">(current)</span></a>
+            </li>
+
+          
+            <li th:if="${Auth=='Admin'}" class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Admin Space
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" th:href="@{/Admin/Users}">Users</a>
+                <a class="dropdown-item" th:href="@{/Admin/Machines}">Machines</a>
+
+
+                <a class="dropdown-item" th:href="@{/Admin/XL}">Downlode Excel  SpredSheat </a>
+            
+            
+              </div>
+            </li>
+          </ul>
+          <td ><a th:href="@{/Admin/AddMachine}"  class="btn btn-secondary ml-1">Add Machine</a>  
+          <td ><a th:href="@{/Admin/AddMachineFamilly}"  class="btn btn-secondary ml-1">Add Machine Family</a>  
+
+
+          <form class="d-inline "  method="POST" th:action="@{/logout}" >  
+            <td ><button type="submit" th:text="${username}"  class="btn btn-primary ml-1">Take Ticket</button>  
+            </form>
+
+          <b></b>
+        </div>
+      </nav>
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
