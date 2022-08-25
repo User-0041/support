@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+      <link rel="stylesheet" href="/css/bootstrap.min.css">
+      <script src="/js/jquery-3.2.1.slim.min.js"></script>
+      <script src="/js/popper.min.js" ></script>
+      <script src="/js/bootstrap.min.js" ></script>
+      <link href="/css/font-awesome.min.css" rel="stylesheet" />
+      <link rel="stylesheet" href="/css/Users.css"> 
     </head>
+    <title>Bulgin Support</title>
 
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -60,7 +63,7 @@
 
                     <div class="form-row">
                         <div class="col-md-7 mb-3">
-                            <label for="Machine_ID">Machine Fmailly Id</label>
+                            <label for="Machine_ID">Machine  Id</label>
                             <input type="text" class="form-control"  th:field="*{id}"  id="Machine  ID" placeholder="Id" >
                             <div class="alert alert-warning" role="alert" th:if="${Unique}" >ID Taken</div>
                             
@@ -72,24 +75,24 @@
 
                     <div class="form-row">
                         <div class="col-md-7 mb-3">
-                            <label for="Machine_ID">Machine Fmailly Name</label>
+                            <label for="Machine_ID">Machine Fmailly </label>
                           
                             <div class="form-group">
                               
                                 <select multiple class="form-control" th:field="*{family}" id="exampleFormControlSelect2">
                                   <option  th:value="${MachineFamilly.id}" th:text="${MachineFamilly.id}" th:each=" MachineFamilly: ${MachineFamillys}" value="" >1</option>
-                                
-                          
                                 </select>
                               </div>
                             
+                              <div class="alert alert-warning" role="alert" th:if="${#fields.hasErrors('family')}" th:errors="*{family}"> </div>
                         </div>
                     </div>
 
 
+
                     <div class="form-row">
                         <div class="col-md-7 mb-3">
-                            <label for="Machine_ID">Machine Fmailly Id</label>
+                            <label for="Machine_ID">Date</label>
                             <input type="date" class="form-control"  th:field="*{start}"  id="Machine  ID" placeholder="Id" >
                             <div class="alert alert-warning" role="alert" th:if="${#fields.hasErrors('start')}" th:errors="*{start}"> </div>
                             

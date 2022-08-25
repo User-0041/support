@@ -54,7 +54,7 @@ public class SupportController {
         model.addAttribute("BreakDowns",BreakDownService.FindAll() );
         model.addAttribute("username",principal.getName() );
         User u = UserService.findByUsername(principal.getName() );
-    model.addAttribute("Auth",u.getPrivilage() );
+        model.addAttribute("Auth",u.getPrivilage() );
 
 
         return "OpenSupport";
@@ -154,14 +154,20 @@ public class SupportController {
 
     @PostMapping("/Support/OpenSupport")
     String  OpenTicket( @Valid Ticket ticket,BindingResult result,Principal principal ,Errors errors, Model model){
+        
+        model.addAttribute("username",principal.getName() );
+        User u = UserService.findByUsername(principal.getName() );
+        model.addAttribute("Auth",u.getPrivilage() );
+
         model.addAttribute("BreakDowns",BreakDownService.FindAll() );
 
 
-
-        if (null != errors && errors.getErrorCount() > 0) { return "OpenSupport";}
-   
-
-
+        if (null != errors && errors.getErrorCount() > 0) {
+            
+            return "OpenSupport";}
+        
+        
+        
         ticket.setStatus(Status.Open);
         ticket.setIssueDate(Utils.CurrentDate());
         ticket.setUser(UserService.findByUsername(principal.getName()));       

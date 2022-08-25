@@ -9,6 +9,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -27,9 +28,11 @@ public class Machine {
     @NotBlank
     String id;
     @ManyToOne
+    @NotNull
     MachineFamily family;
     @OneToMany
     List<Ticket> tickets;
+    @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     Date start;
 

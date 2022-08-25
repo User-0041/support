@@ -90,11 +90,16 @@ public String AddUser(User user,Principal principal , Model model){
 
 
 @PostMapping(value="/Admin/SaveUsers")
-public String SaveUser(@Valid User user,BindingResult result,Errors errors, @RequestParam(value = "Role") String role) {
-    if (null != errors && errors.getErrorCount() > 0) { return "AddUser";}
+public String SaveUser(@Valid User user,BindingResult result,Errors errors, @RequestParam(value = "Role") String role,Principal principal,Model model) {
 
+    System.out.println(user.getTelephoneNumber());
+    if (null != errors && errors.getErrorCount() > 0) { 
+        model.addAttribute("username",principal.getName() );
+        User u = UserService.findByUsername(principal.getName() );
+        model.addAttribute("Auth",u.getPrivilage() );
+        return "AddUser";}
 
-    user.setPassword( PasswordEncoder.encode(user.getTelephoneNumber().toString()) );
+    user.setPassword( PasswordEncoder.encode(user.getTelephoneNumber()) );
 
     if(role.equals("Resever")){
        UserService.CreateUser(new Resever(user));

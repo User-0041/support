@@ -4,8 +4,15 @@
     
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+    <title>Bulgin Support</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script src="/js/jquery-3.2.1.slim.min.js"></script>
+    <script src="/js/popper.min.js" ></script>
+    <script src="/js/bootstrap.min.js" ></script>
+    <link href="/css/font-awesome.min.css" rel="stylesheet" />
+
+    <title>Bulgin Support</title>
+
 </head>
 <body>
     <body>
@@ -62,8 +69,9 @@
                 <div class="form-row">
                     <div class="col-md-7 mb-3">
                         <label for="Machine_ID">Machine_Id</label>
-                        <input type="text" class="form-control"  th:field="*{machine}"  id="machine" placeholder="Id" >
-                        
+                        <input th:if="${ticket.machine== null}" type="text" class="form-control"  id="machine" name="machine"    placeholder="Id" >  
+
+                        <input th:if="${ticket.machine!= null}" type="text" class="form-control"  id="machine" name="machine"   th:value="${ticket.machine.id}"  placeholder="Id" >  
                         <div class="alert alert-warning" role="alert" th:if="${#fields.hasErrors('machine')}" th:errors="*{machine}"> </div>
                         
                     </div>
@@ -82,8 +90,8 @@
                 <div class="form-row">
                     <div class="col-md-7 mb-3">
                         <label >TITELE</label>
-                        <input type="text" class="form-control" th:field="*{Titel}" id="Titel" placeholder="Titel" >
-                        <div class="alert alert-warning" role="alert" th:if="${#fields.hasErrors('Titel')}" th:errors="*{Titel}"> </div>
+                        <input type="text"  class="form-control"  th:field="*{titel}"   placeholder="Titel" >
+                        <div class="alert alert-warning" role="alert" th:if="${#fields.hasErrors('titel')}" th:errors="*{titel}"> </div>
 
                         
                     </div>

@@ -50,7 +50,6 @@ Breakdown breakdown;
 @Enumerated
 Level level;
 @NotEmpty(message = "Titel empty")
-@NotNull(message = "Titel empty")
 String titel;
 
 
