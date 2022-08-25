@@ -11,7 +11,7 @@ import org.hibernate.result.Output;
 
 import com.support.Entitis.Ticket;
 import com.support.Entitis.User;
-import com.support.Services.UserWraper;
+
 
 
 public class Utils{
@@ -26,15 +26,5 @@ public class Utils{
         return   Houres +":" + Minits;
     }
 
-    public static List<UserWraper> WrapUserList(List<User> Users){
-        List<UserWraper> output = new ArrayList<>();
-        Users.forEach(user ->{
-            output.add(new UserWraper(user));
-        });
 
-
-        return output;
-
-
-    }
 }
