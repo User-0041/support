@@ -74,10 +74,10 @@
                             <tr>
                               <th scope="col" class="border-0 text-uppercase font-medium pl-4">#</th>
                               <th scope="col" class="border-0 text-uppercase font-medium">UserName</th>
-                              <th scope="col" class="border-0 text-uppercase font-medium">Phone Number</th>
+                              <th scope="col" class="border-0 text-uppercase font-medium">Contact</th>
                               <th scope="col" class="border-0 text-uppercase font-medium">Ticket</th>
-                              <th scope="col" class="border-0 text-uppercase font-medium">Categori</th>
-                              <th scope="col" class="border-0 text-uppercase font-medium">Categori</th>
+                              <th scope="col" class="border-0 text-uppercase font-medium">Role</th>
+                              <th scope="col" class="border-0 text-uppercase font-medium">Lock</th>
 
 
 
@@ -111,8 +111,8 @@
 
                                   <form class="form-inline" th:action="@{/Admin/DropeUser/{id}(id=${User.username})}" method="post">
                                     
-                                    <button th:if="${!User.IsActive}" type="submit" th:disabled="${User.getPrivilage()=='Admin'}" class="btn btn-outline-info btn-circle btn-lg btn-circle"><i  class="fa fa-key" ></i> </button>
-                                    <button th:if="${User.IsActive}" type="submit" th:disabled="${User.getPrivilage()=='Admin'}" class="btn btn-outline-info btn-circle btn-lg btn-circle"><i  class="fa fa-lock" ></i> </button>
+                                    <button th:if="${!User.IsActive}" type="submit" th:disabled="${User.getPrivilage()=='Admin'}" class="btn btn-outline-info btn-circle btn-lg btn-circle">UnLock </button>
+                                    <button th:if="${User.IsActive}" type="submit" th:disabled="${User.getPrivilage()=='Admin'}" class="btn btn-outline-info btn-circle btn-lg btn-circle">Lock</button>
                                     
                                   </form>
                                   

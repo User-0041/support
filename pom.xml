@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.support</groupId>
 	<artifactId>support</artifactId>
-	<version>0.9-Beta</version>
+	<version>1.0</version>
 	<name>support</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>

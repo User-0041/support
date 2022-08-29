@@ -73,7 +73,7 @@ public String Users(Model model ,Principal principal) {
 @PostMapping(value="/Admin/DropeUser/{id}")
 public String DropeUser(@PathVariable("id") String id) {
     UserService.RevokeResever(id);
-   return "Debug";
+   return "redirect:/Admin/Users";
 }
 
 
